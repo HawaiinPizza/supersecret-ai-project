@@ -5,7 +5,7 @@
 
 // Enum of the directions agent can go
 enum class dir{
-     START, LEFT, RIGHT, UP, DOWN
+     LEFT, RIGHT, UP, DOWN
 };
 
 
@@ -16,6 +16,6 @@ enum class grid{
 
 // The actual map
 extern std::vector<std::vector<grid>> map;
-extern std::pair<int, int> startpos;
-extern std::pair<int, int> endpos;
+extern std::pair<int, int> start_pos;
+extern std::pair<int, int> end_pos;
 #endif

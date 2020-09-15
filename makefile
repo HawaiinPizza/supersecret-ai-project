@@ -19,10 +19,8 @@ ${BIN}: ${OBJ}
 
 
 %.o : %.cpp
-	g++ -c $*.cpp -o $*.o  
+	g++ -c -g $*.cpp -o $*.o  
 
-debug: ${OBJ}
-	g++ -c $*.cpp -o $*.o 
 
 
 clean:
