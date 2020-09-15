@@ -7,29 +7,29 @@ int main(){
      vector<node> explore;
      vector<node> test;
      node start=node(2,3);
-     node a1=node(2,1, &start, dir::RIGHT);
-     node a2=node(2,2, &start, dir::LEFT);
-     node a3=node(2,3, &start, dir::UP);
-     node a4=node(2,3, &start, dir::DOWN);
+     node left=node(2,2, &start, dir::DOWN);
+     node right=node(2,4, &start, dir::DOWN);
 
-     explore.push_back(a1);
-     explore.push_back(a2);
-     explore.push_back(a3);
+     node down=node(3,3, &start, dir::DOWN);
+     node up=node(1,3, &start, dir::DOWN);
 
-     test.push_back(a1);
-     test.push_back(a2);
+     explore.push_back(left);
+     explore.push_back(right);
+     // explore.push_back(down);
+     explore.push_back(up);
 
-     test.push_back(a4);
-     test.push_back(a4);
-     test.push_back(a4);
-     test.push_back(a4);
 
-     auto a =get_adj(&start, explore, test);
+     auto a =get_adj(&start, explore );
 
+     cout << "inside solution we have " << endl;
      for(auto x : a){
 	  cout << x.pos.first << ':' << x.pos.second << "\t" << x.past_path <<endl;
      }
+     cout << "insdie explore set we have" << endl;
      
+     for(auto x : explore){
+	  cout << x.pos.first << ':' << x.pos.second << "\t" << x.past_path <<endl;
+     }
 
 
 }

@@ -49,7 +49,7 @@ struct astarCompare{
 typedef std::priority_queue<node, std::vector<node>, astarCompare> aqueue;
 
 // Get all the adjacent nodes of the current node
-std::vector<node> get_adj(const node* curNode, const std::vector<node> explore, std::vector<node> test);
+std::vector<node> get_adj(const node* curNode, const std::vector<node> explore);
 
 std::vector<node> get_path(std::vector<node>);
 
