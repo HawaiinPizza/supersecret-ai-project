@@ -19,16 +19,11 @@ ${BIN}: ${OBJ}
 
 
 %.o : %.cpp
-<<<<<<< HEAD
 	g++ -c $*.cpp -o $*.o  
 
 debug: ${OBJ}
-=======
 	g++ -c $*.cpp -o $*.o 
 
-DEBUG: ${OBJ}
->>>>>>> 14d86be... first start
-	${CC} ${DEBUG} -o $@ ${OBJ} ${INCDIRS} ${LIBDIRS} ${LIBS}
 
 clean:
 	rm -rf ${BIN} ${OBJ}
