@@ -1,12 +1,23 @@
 #ifndef HEAD
 #define HEAD
 #include <vector>
+<<<<<<< HEAD
+#include <math.h>
+
+// Enum of the directions agent can go
+enum class dir{
+     START, LEFT, RIGHT, UP, DOWN
+};
+
+
+=======
 
 // Enum of the directions agent can go
 enum class dir{
      LEFT=2, RIGHT=2, UP=3, DOWN=1
 };
 
+>>>>>>> 14d86be... first start
 // Enum of the type of elements a map has
 enum class grid{
      FREE, BLOCK, START, GOAL
@@ -14,6 +25,10 @@ enum class grid{
 
 // The actual map
 extern std::vector<std::vector<grid>> map;
+<<<<<<< HEAD
+extern std::pair<int, int> startpos;
+extern std::pair<int, int> endpos;
+=======
 
 namespace search{
 // Interactive depth search for the map
@@ -25,5 +40,6 @@ namespace search{
 }
 
 
+>>>>>>> 14d86be... first start
 
 #endif
