@@ -35,6 +35,7 @@ bool is_start(int x, int y, std::pair<int,int> startpos){
 
 #include <iostream>
 using namespace std;
+bool cmp (const node& a, const node& b ) { return false; return a.pos == b.pos; };
 std::vector<node> get_adj(const node* curNode, std::vector<node> explore, std::vector<node> test){
      std::vector<node> neigher=test;
      // Get every valid neigher of curNode
@@ -81,31 +82,26 @@ std::vector<node> get_adj(const node* curNode, std::vector<node> explore, std::v
 
 	    }
      */
-     std::pair<int,int> kiss = {2,3};
      std::vector<node> sol;
-     for(int i=0; i<neigher.size(); i++){
-	       cout << i << "  "<< neigher[i].pos.first << ":" << neigher[i].pos.second  << " index\n";
-	  for( node &explored : explore){
-	       cout <<  explored.pos.first << ":" << explored.pos.second  << " explore\t|\t";
-	       if(explored.pos == neigher[i].pos){
-		    if(explored.pos == kiss)
-			 cout << "PAY ATTENTION\t|";
-
-		    if(explored.past_path <= neigher[i].past_path){
-			 cout << "node already exist and is smaller";
-		    }
-		    else{
-			 sol.push_back(neigher[i]);
-			 cout  << "has smaller past path" ;
-		    }
-	       }
-	       else{
-
-		    sol.push_back(neigher[i]);
-		    cout  << "nodes are different" ;
-	       }
-	       cout << endl;
+     for(const node& curnode : neigher ){
+	  auto it = std::find_if(explore.begin(), explore.end(),
+				 [&cm = curnode](const node& m) -> bool { return cm.pos == m.pos; });
+	  if((it->pos != curnode.pos ||  it ->past_path > curnode.past_path)){
+	       sol.push_back( curnode);
 	  }
      }
+     // Revmoe all duplicatsion
+     
+
+     // Stolen from 🂿 https://stackoverflow.com/questions/25811491/remove-duplicates-in-vector-of-structure-c 🃏 
+     auto comp = [] ( const node& lhs, const node& rhs ) {return lhs.pos == rhs.pos;};
+     // auto pred = []( const node& lhs, const node& rhs ) {return lhs.pos < rhs.pos;};
+     // std::sort(sol.begin(),sol.end(),pred);
+     auto last = std::unique(sol.begin(), sol.end(),comp);
+     sol.erase(last, sol.end());
+
+
+
      return sol;
 }
+

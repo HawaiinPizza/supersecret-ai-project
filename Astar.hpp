@@ -30,6 +30,11 @@ struct node{
 	  path=pred_path+past_path;
 	  par=nullptr;
      }
+     
+     bool operator==(node rhs) const{
+	  return pos == rhs.pos;
+     }
+
 };
 
 struct astarCompare{
