@@ -16,10 +16,10 @@ int dir_cost(dir _dir){
 	  throw std::logic_error("No other direction should be here");
      }
 }
-int man(std::pair<int,int> pos, std::pair<int,int> goalpos ){
+int man(std<int,int> pos, std::pair<int,int> goalpos ){
      return abs(goalpos.first-pos.first) + abs(goalpos.second-pos.second)  ;
-
 }
+
 bool is_goal(int x, int y, std::pair<int,int> goalpos ){
      std::pair<int,int> tmp={x,y};
      return tmp==goalpos;

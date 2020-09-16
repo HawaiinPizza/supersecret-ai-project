@@ -1,0 +1,66 @@
+#+TITLE: Programming 1: Search Algorihtms with Zaki and Muaz
+#+LATEX_HEADER:  \usepackage{listings}
+#+OPTIONS: num:nil toc:nil
+
+
+* Speciifcations
+** TODO =int Dist(starting pos, ending pos)= 
+  return cost of distacne travel. Make note however to get the cost of moving: so if the total distance is {2,3}, distance should be $2*2+3*1 = 13$ (assuming postive y is down movement, and negative y is up movement)
+** TODO order 
+ You explore west, north, east, then south
+** TODO Label 
+  each point in explored set has a lable. To decide which point to explore next all else equal, start from smallest point to largest
+** TODO =a*(map, starting pos, ending pos)=  
+ get the a* path from start to end.
+* Helper Functions/structres [/]
+** TODO =Point= 
+ =std::pair<int,int>=
+** TODO =Label= 
+ point with path cost, heuristic cost, past path cost and int values represneting label
+** TODO =getneighers(const point* node)= 
+ get the neighers of the current node
+** TODO =vector<label> check_neigher(vector<label> explore, vector<label> neighers)=
+   #+begin_src plantuml :file .NewLabelCritera.png
+     start
+	 if ( node isn't in explore) then 
+	 :add current node is in frontier list;
+	 end
+	 else if (node has les g/past path then it's counterpart) then 
+	 :add current node is in frontier list;
+	 :remove node from explore;
+	 end
+	 else
+	 :do nothing;
+	 stop
+     endif
+   #+end_src
+
+   #+RESULTS:
+   [[file:.NewLabelCritera.png]]
+** =astar(start_label, end_label, map)=
+   #+begin_src plantuml :file .Astar.png
+   start
+     :front = {start_label};
+     :explore = {} ;
+     while (front is not empty)
+	: cur_label = front.pop() ;
+	: explore.push( cur_label);
+	if ( cur_label )  then ( is goal pos )
+		:get_path( cur_label);
+		stop
+	else  (cur_label is not goal node. )
+		:neighbors = getneighbors(cur_label);
+		:nodes_to_check = check_neigher(explore, neighbors);
+		:front.push(nodes_to_check);
+		
+
+	endif
+     endwhile
+     end
+     
+
+
+   #+end_src
+
+   #+RESULTS:
+   [[file:.Astar.png]]
