@@ -15,21 +15,31 @@ int main(){
 
      explore.push_back(left);
      explore.push_back(right);
-     // explore.push_back(down);
+     explore.push_back(down);
      explore.push_back(up);
 
 
      auto a =get_adj(&start, explore );
 
-     cout << "inside solution we have " << endl;
-     for(auto x : a){
-	  cout << x.pos.first << ':' << x.pos.second << "\t" << x.past_path <<endl;
-     }
      cout << "insdie explore set we have" << endl;
      
      for(auto x : explore){
 	  cout << x.pos.first << ':' << x.pos.second << "\t" << x.past_path <<endl;
      }
+     cout << endl;
+
+     {
+	  const node* temp;
+	  temp = &up;
+	  cout << *temp << endl;
+	  while(temp->pos != start.pos ){
+	       temp=temp->par;
+	  }
+	  
+     }
+
+     
 
 
 }
+
