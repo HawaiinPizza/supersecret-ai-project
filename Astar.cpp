@@ -38,7 +38,7 @@ vect get_neighers(const node* node){
 	       struct node tmp1(point(pos.x, pos.y+1), node, RIGHT, label++);
 	       neigherbors.push_back(tmp1);
 
-	       struct node tmp2(point(pos.x, pos.y+1), node, LEFT, label++);
+	       struct node tmp2(point(pos.x, pos.y-1), node, LEFT, label++);
 	       neigherbors.push_back(tmp2);
 	  }
      }
@@ -60,7 +60,6 @@ vect should_check( vect neighs, vect explore ){
 	       // tmp is less then it
 	       if(*it < tmp){
 		    sol.push_back(tmp);
-		    explore.erase(it);
 	       }
 	  }
 	  else{
@@ -76,13 +75,11 @@ vect get_path(const node* start, const point* end ){
      const node* tmp=start;
      while(tmp->pos != *end || tmp == NULL){
 	  sol.push_back(*tmp);
-	  std::cout << *tmp << std::endl;
 	  if(tmp->par ==NULL){
 	       throw("Path wasn't found, even though it should. OOPS");
 	  }
 	  tmp=tmp->par;
      }
-     std::cout << *tmp << std::endl;
      return sol;
 }
 
@@ -97,9 +94,8 @@ vect astar(const node* start, const point end){
 	  front.pop();
 	  explore.push_back(cur);
 	  if(cur.pos == end){
-	       std::cout << cur << std::endl;
-	       return sol;
-	       // return get_path(&cur, &start->pos);
+	       // return sol;
+	       return get_path(&cur, &start->pos);
 	  }
 	  vect neighers = get_neighers(&cur);
 	  vect check_these = should_check(neighers, explore);

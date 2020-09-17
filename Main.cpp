@@ -199,14 +199,15 @@ void aastar(){
      node start(point(3,0));
      point end(2,2);
      vect test=astar(&start, end);
+     cout <<test.size() << endl;
 }
 int main(){
+     aastar();
      // getPath();
      // fronttest();
      distChecking();
      nodeCheck();
      neigherCheck();
      explroeCheck();
-     aastar();
 
 }
