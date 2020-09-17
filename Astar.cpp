@@ -1,5 +1,6 @@
 #include "Astar.hpp"
 #include <algorithm>
+#include <stdlib.h>
 
 vect get_neighers(const node* node){
      std::vector<struct node> neigherbors;
@@ -90,14 +91,15 @@ vect astar(const node* start, const point end){
      front.push(*start);
      vect explore;
      while(!front.empty()){
-	  node cur = front.top();
+	  node* cur = new node;
+	  *cur = front.top();
 	  front.pop();
-	  explore.push_back(cur);
-	  if(cur.pos == end){
+	  explore.push_back(*cur);
+	  if(cur->pos == end){
 	       // return sol;
-	       return get_path(&cur, &start->pos);
+	       return get_path(cur, &start->pos);
 	  }
-	  vect neighers = get_neighers(&cur);
+	  vect neighers = get_neighers(cur);
 	  vect check_these = should_check(neighers, explore);
 	  for(auto n: check_these){
 	       front.push(n);
