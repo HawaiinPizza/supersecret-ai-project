@@ -54,7 +54,8 @@ class label(point,parent_pos,dir,label){
 
    #+RESULTS:
    [[file:.NewLabelCritera.png]]
-** TODO =astar(start_label, end_label, map)=
+** DONE =astar(start_label, end_label, map)=
+   - State "DONE"       from "TODO"       [2020-09-17 Thu 16:29]
    #+begin_src plantuml :file .Astar.png
    start
      :front = {start_label};

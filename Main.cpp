@@ -207,6 +207,7 @@ void aastar(){
      
      node start(point(3,0));
      point end(2,2);
+     // point end(4,4);
      vect test=astar(&start, end);
      for(auto x: test){
 	  cout << x << endl;
