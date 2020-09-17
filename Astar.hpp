@@ -1,42 +1,12 @@
 #ifndef ASTAR
 #define ASTAR
-#include "Head.hpp"
-#include <iostream>
+#include "Nodes.hpp"
 
-struct point{
-     int x; int y;
-     point();
-     point(int x, int y);
-     bool operator==(const point& rhs);
-     bool operator!=(const point& rhs);
-     point operator+(const point& rhs);
-     point operator+=(const point& rhs);
-     point operator-(const point& rhs);
-     point operator-=(const point& rhs);
-     friend std::ostream &operator<<(std::ostream &os, const point& p);
-};
-extern point _end_pos;
-extern point _start_pos;
 
-int dist(point start, point end=_end_pos);
-int dist(std::pair<int,int> start, std::pair<int,int> end=end_pos);
+vect get_neighers(const node* node);
+vect check_neighers(vect nodes);
+vect get_path(const point* start, const point* end );
+vect astar(point start, point end);
 
-struct node{
-     point pos;
-     int past;
-     int pred;
-     int path;
-     
-     node(point _pos, dir _dir, int _label);
-     node(point _pos);
-
-     friend std::ostream &operator<<(std::ostream &os, const node& n);
-
-     bool operator==(const node& rhs);
-     bool operator!=(const node& rhs);
-     bool operator<(const node& rhs);
-     bool operator>(const node& rhs);
-     
-};
 
 #endif

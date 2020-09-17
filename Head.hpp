@@ -5,7 +5,7 @@
 
 // Enum of the directions agent can go
 enum dir{
-     LEFT, RIGHT, UP, DOWN
+     LEFT, RIGHT, UP, DOWN, NONE
 };
 
 
