@@ -4,13 +4,13 @@
 #include <math.h>
 
 // Enum of the directions agent can go
-enum class dir{
+enum dir{
      LEFT, RIGHT, UP, DOWN
 };
 
 
 // Enum of the type of elements a map has
-enum class grid{
+enum grid{
      FREE, BLOCK, START, GOAL
 };
 

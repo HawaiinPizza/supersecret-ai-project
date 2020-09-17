@@ -4,7 +4,8 @@
 
 
 * Speciifcations
-** TODO =int Dist(starting pos, ending pos)= 
+** DONE =int Dist(starting pos, ending pos)= 
+   - State "DONE"       from "TODO"       [2020-09-16 Wed 19:13]
   return cost of distacne travel. Make note however to get the cost of moving: so if the total distance is {2,3}, distance should be $2*2+3*1 = 13$ (assuming postive y is down movement, and negative y is up movement)
 ** TODO order 
  You explore west, north, east, then south
@@ -12,11 +13,25 @@
   each point in explored set has a lable. To decide which point to explore next all else equal, start from smallest point to largest
 ** TODO =a*(map, starting pos, ending pos)=  
  get the a* path from start to end.
-* Helper Functions/structres [/]
-** TODO =Point= 
+* Helper Functions/structres [1/5]
+** DONE =Point= 
+   - State "DONE"       from "TODO"       [2020-09-16 Wed 18:39]
  =std::pair<int,int>=
 ** TODO =Label= 
  point with path cost, heuristic cost, past path cost and int values represneting label
+ #+begin_src plantuml :file .Label.png
+class label(point,parent_pos,dir,label){
++pred = dist(startpos, endpos) 
++past = par
+	+path = parent_pos + getdircost dir
+	label= label
+	
+} 
+ #+end_src
+
+ #+RESULTS:
+ [[file:.Label.png]]
+
 ** TODO =getneighers(const point* node)= 
  get the neighers of the current node
 ** TODO =vector<label> check_neigher(vector<label> explore, vector<label> neighers)=
@@ -37,7 +52,7 @@
 
    #+RESULTS:
    [[file:.NewLabelCritera.png]]
-** =astar(start_label, end_label, map)=
+** TODO =astar(start_label, end_label, map)=
    #+begin_src plantuml :file .Astar.png
    start
      :front = {start_label};

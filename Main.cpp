@@ -1,45 +1,50 @@
 #include "Astar.hpp"
 #include <vector>
 #include <iostream>
+#include <cassert>
 using namespace std;
 
-int main(){
-     vector<node> explore;
-     vector<node> test;
-     node start=node(2,3);
-     node left=node(2,2, &start, dir::DOWN);
-     node right=node(2,4, &start, dir::DOWN);
+int distChecking(){
+     point pointstay(5,5);
+     // North east 
+     point p(3,7);
+     assert(dist(pointstay, p)  == 10);
 
-     node down=node(3,3, &start, dir::DOWN);
-     node up=node(1,3, &start, dir::DOWN);
-
-     explore.push_back(left);
-     explore.push_back(right);
-     explore.push_back(down);
-     explore.push_back(up);
-
-
-     auto a =get_adj(&start, explore );
-
-     cout << "insdie explore set we have" << endl;
+     // North
+     p=point(3,5);
+     assert(dist(pointstay, p)  == 6);
      
-     for(auto x : explore){
-	  cout << x.pos.first << ':' << x.pos.second << "\t" << x.past_path <<endl;
-     }
-     cout << endl;
+     // Norht west
+     p=point(3,3);
+     assert(dist(pointstay, p)  == 10);
+     
+     // East
+     p=point(5,7);
+     assert(dist(pointstay, p)  == 4);
 
-     {
-	  const node* temp;
-	  temp = &up;
-	  cout << *temp << endl;
-	  while(temp->pos != start.pos ){
-	       temp=temp->par;
-	  }
-	  
-     }
+     // Sotuh East
+     p=point(7,7);
+     assert(dist(pointstay, p)  == 6);
 
+     // South
+     p=point(7,5);
+     assert(dist(pointstay, p)  == 2);
+
+     // South west
+     p=point(7,3);
+     assert(dist(pointstay, p)  == 6);
+
+     // West
+     p=point(5,3);
+     assert(dist(pointstay, p)  == 4);
+
+     return 0;
      
 
 
 }
 
+
+int main(){
+     distChecking();
+}
