@@ -195,7 +195,16 @@ void fronttest(){
      }
 }
 
+void tileCheck(){
+     for(std::vector<grid> row: map){
+	  for(grid tile : row){
+	       cout << tile << '\t';
+	  }
+	  cout << endl;
+     }
+}
 void aastar(){
+     
      node start(point(3,0));
      point end(2,2);
      vect test=astar(&start, end);
@@ -204,12 +213,13 @@ void aastar(){
      }
 }
 int main(){
+     // tileCheck();
      aastar();
      // getPath();
      // fronttest();
-     distChecking();
-     nodeCheck();
-     neigherCheck();
-     explroeCheck();
+     // distChecking();
+     // nodeCheck();
+     // neigherCheck();
+     // explroeCheck();
 
 }
