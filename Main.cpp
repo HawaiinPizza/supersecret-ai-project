@@ -2,6 +2,8 @@
 #include <vector>
 #include <iostream>
 #include <cassert>
+#include <queue>
+#include <algorithm>
 using namespace std;
 
 int distChecking(){
@@ -52,13 +54,23 @@ void nodeCheck(){
 
      node n1(point(3,1));
 
-     node n2(point(3, 2), n1, RIGHT, 1); cout << n2 << endl;
-     node n7(point(2, 2), n2, UP,6 ); cout << n7 << endl;
+     node n2(point(3, 2), &n1, RIGHT, 1);
+     node n7(point(2, 2), &n2, UP,6 );
 
-     node n3(point(3, 0), n1, LEFT, 2); cout << n3 << endl;
-     node n6(point(3, 3), n2, RIGHT, 5); cout << n6 << endl;
-     node n4(point(4, 1), n1, DOWN, 3); cout << n4 << endl;
-     node n5(point(2, 1), n1, UP,4 ); cout << n5 << endl;
+     node n3(point(3, 0), &n1, LEFT, 2);
+     node n4(point(4, 1), &n1, DOWN, 3);
+     node n5(point(2, 1), &n1, UP,4 );
+     node n6(point(3, 3), &n2, RIGHT, 5);
+
+     assert(5==n1.path);
+     assert(5==n2.path);
+     assert(5==n7.path);
+
+     assert(9==n3.path);
+     assert(9==n4.path);
+     assert(5==n5.path);
+     assert(9==n6.path);
+
 
 
 }
@@ -89,8 +101,112 @@ void neigherCheck(){
      check(3, map[0].size(), 3);
 }
 
+void explroeCheck(){
+
+     { // Checking if you can search thorugh the list
+	  node n1(point(3,1));
+	  node n2(point(3, 2), &n1, RIGHT, 1);
+	  node n7(point(2, 2), &n2, UP,6 );
+
+	  node n3(point(3, 0), &n1, LEFT, 2);
+	  node n6(point(3, 3), &n2, RIGHT, 5);
+	  node n4(point(4, 1), &n1, DOWN, 3);
+	  node n5(point(2, 1), &n1, UP,4 );
+	  vect test={n1,n2,n3};
+
+	  auto it=find(test.begin(), test.end(), n1);
+	  assert(it != test.end());
+	  it=find(test.begin(), test.end(), n4);
+	  assert(it == test.end());
+
+     }
+     { // Now check explore 
+	  node n(point(3,3));
+	  node nl(point(3,2), &n, LEFT, 1);
+	  node nr(point(3,4), &n, RIGHT, 2);
+	  node nu(point(2,3), &n, UP, 3);
+	  node nd(point(4,3), &n, DOWN, 4);
+	  // DONE if neighers are all already in explored
+	  vect test={nl,nr, nu, nd};
+	  assert(should_check(test, test).size()==0 );
+	  vect tmp=test;
+	  // DONE if neighers are have shorter path then put it in sol
+	  test[0].path=99;
+	  test[1].path=99;
+	  assert(should_check(tmp, test).size()==2 );
+	  // DONE if neighers are not in explored
+	  test.erase(find(test.begin(), test.end(), nl));
+	  test.erase(find(test.begin(), test.end(), nr));
+	  assert(should_check(tmp, test).size()==2 );
+     }
+}
+
+void getPath(){
+     { // real path
+	  node n1(point(3,1));
+	  node n2(point(3, 2), &n1, RIGHT, label++);
+	  node n3(point(4, 2), &n2, DOWN, label++);
+	  node n4(point(4, 1), &n3, LEFT, label++);
+	  node n5(point(2, 1), &n4, DOWN, label++);
+	  point tmp=point(3,1);
+	  vect path=get_path(&n5, &tmp);
+	  for(int i=0; i<path.size(); i++){
+	       string dir;
+	       switch ( path[i].par_dir){
+	       case LEFT:
+		    dir="LEFT";
+		    break;
+	       case RIGHT:
+		    dir="RIGHT";
+		    break;
+	       case UP:
+		    dir="UP";
+		    break;
+	       case DOWN:
+		    dir="DOWN";
+		    break;
+	       case NONE:
+		    dir="START";
+		    break;
+	       };
+	       cout << path[i].label << ':' << dir << endl;
+	  }
+
+     }
+}
+
+
+void fronttest(){
+     std::priority_queue<struct node, std::vector<node>, compare> test;
+     node n1(point(3,1));
+     node n2(point(3, 2), &n1, RIGHT, label++);
+     node n3(point(4, 2), &n2, DOWN, label++);
+     node n4(point(4, 1), &n3, LEFT, label++);
+     node n5(point(2, 1), &n4, DOWN, label++);
+     test.push(n1);
+     test.push(n2);
+     test.push(n3);
+     test.push(n4);
+     test.push(n5);
+     int tmp = test.top().path;
+     while(!test.empty()){
+	  cout << test.top() << endl;
+	  test.pop();
+     }
+}
+
+void aastar(){
+     node start(point(3,0));
+     point end(2,2);
+     vect test=astar(&start, end);
+}
 int main(){
+     // getPath();
+     // fronttest();
      distChecking();
-     // nodeCheck();
+     nodeCheck();
      neigherCheck();
+     explroeCheck();
+     aastar();
+
 }
