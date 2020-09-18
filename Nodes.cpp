@@ -5,7 +5,6 @@
 #include <climits>
 // Global variable. Increases all the bloddy time
 // NOTE May need to change
-int label=1;
 
 point::point(){
      x=0;
@@ -112,11 +111,11 @@ node::node(point _pos){
 }
 
 node::node(){
-     pos = point(0,0);
-     past=0;
+     pos = point(-1,-1);
+     past = 0;
      pred = INT_MAX;
-     path = pred;
-     past_pos = point(0,0);
+     path = past+pred;
+     past_pos = point(-1,-1);
      label = -1;
      par_dir = NONE;
      par = NULL;
@@ -139,7 +138,7 @@ std::ostream &operator<<(std::ostream &os, const node& n){
 	  dir="DOWN";
 	  break;
      case NONE:
-	  dir="START";
+	  dir="NONE";
 	  break;
      };
      os << n.label << "\t: pos    " << n.pos << " path\t" << n.past << '+' << n.pred << '=' << n.path << "    \tpast_pos:\t" << n.past_pos << "\tdirection\t " << dir;
@@ -159,6 +158,12 @@ bool node::operator>(const node& rhs){
 }
 bool node::operator<(const node& rhs) {
      return rhs.path < this->path;
+}
+
+
+bool node::null(){
+     return (label == -1 || pos == point(-1,-1) || path == INT_MAX);
+	  
 }
 
 

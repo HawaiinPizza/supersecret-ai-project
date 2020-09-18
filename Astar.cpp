@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <stdlib.h>
 
-vect get_neighers(const node* node){
+vect get_neighers(const node* node, int label){
      std::vector<struct node> neigherbors;
      point pos = node->pos;
      // LEFT
@@ -36,22 +36,22 @@ vect get_neighers(const node* node){
 
 
 // For each neighering node, check it in the epxlore set
-vect should_check( vect neighs, vect explore ){
+vect should_check( vect neighs, std::vector<vect>* explore ){
      vect sol;
      // NOTE This assumes node's equilvent oeprators compare label,
      // And it's greater then/less than compare path
      // NOTE if this hcanges it will not work.
      // NOTE Zaki i'm looking at you you freaking degerante
      for(node tmp: neighs){
-	  auto it=find(explore.begin(), explore.end(), tmp);
-	  // tmp is in explroe set
-	  if(it != explore.end()){
-	       // tmp is less then it
-	       if(*it < tmp){
-		    sol.push_back(tmp);
-	       }
+	  point pos=tmp.pos;
+	  // tmp is not in explore set
+	  if( (*explore)[pos.x][pos.y].null() ){
+	       (*explore)[pos.x][pos.y] = tmp;
+	       sol.push_back(tmp);
 	  }
-	  else{
+	  // tmp in explored but has less path cost then what's currenlty in
+	  else if( (*explore)[pos.x][pos.y] > tmp){
+	       (*explore)[pos.x][pos.y] = tmp;
 	       sol.push_back(tmp);
 	  }
 	  
@@ -65,8 +65,7 @@ vect get_path(const node* start, const point* end ){
      while(tmp->pos != *end || tmp == NULL){
 	  sol.push_back(*tmp);
 	  if(tmp->par ==NULL){
-	       std::cout << ("Path wasn't found, even though it should. OOPS");
-	       throw("Path wasn't found, even though it should. OOPS");
+	       std::cerr << ("Path wasn't found, even though it should. OOPS");
 	  }
 	  tmp=tmp->par;
      }
@@ -79,26 +78,44 @@ vect astar(const node* start, const point end){
      vect sol;
      frontQueue front;
      front.push(*start);
-     vect explore;
+     std::vector<vect> explore;
+     explore.resize(map.size());
+     for(int i=0; i<map.size(); i++){
+	  explore[i].resize(map.size());
+     }
      while(!front.empty()){
 	  node* cur = new node;
 	  *cur = front.top();
 	  front.pop();
-	  explore.push_back(*cur);
 	  if(cur->pos == end){
-	       // return sol;
-	       // for(auto tmp: explore){
-	       // 	    std::cout << tmp << std::endl;
-	       // }
+	       std::cout << "we did it boys 🚬";
 	       return get_path(cur, &start->pos);
 	  }
-	  vect neighers = get_neighers(cur);
-	  vect check_these = should_check(neighers, explore);
+	  vect neighers = get_neighers(cur, cur->label);
+	  vect check_these = should_check(neighers, &explore);
 	  for(auto n: check_these){
 	       front.push(n);
 	  }
+	  /*
+	    node* cur = new node;
+	    *cur = front.top();
+	    front.pop();
+	    // explore.push_back(*cur);
+	    if(cur->pos == end){
+	    // return sol;
+	    // for(auto tmp: explore){
+	    // 	    std::cout << tmp << std::endl;
+	    // }
+	    return get_path(cur, &start->pos);
+	    }
+
+	    vect neighers = get_neighers(cur, cur->label);
+	    vect check_these = should_check(neighers, explore);
+	    for(auto n: check_these){
+	    front.push(n);
+	    }
+	  */
      }
-     std::cout << ("God damn it it didn't get a path");
-     throw("God damn it it didn't get a path");
-     
+     std::cerr << ("God damn it it didn't get a path");
+     return sol;
 }

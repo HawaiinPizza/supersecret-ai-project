@@ -44,6 +44,7 @@ struct node{
      bool operator!=(const node& rhs);
      bool operator>(const node& rhs);
      bool operator<(const node& rhs);
+     bool null();
 };
 typedef std::vector<node> vect;
 grid getTile(int x, int y);

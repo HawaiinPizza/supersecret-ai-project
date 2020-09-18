@@ -78,7 +78,8 @@ void nodeCheck(){
 void neigherCheck(){
      auto check = [](int x, int y, int count){
 	  node tmp(point(x,y));
-	  vector<node> list = get_neighers(&tmp);
+	  int label=2;
+	  vector<node> list = get_neighers(&tmp, label);
 	  assert(list.size() == count);
      };
      // Middle Middle 4
@@ -128,22 +129,26 @@ void explroeCheck(){
 	  node nd(point(4,3), &n, DOWN, 4);
 	  // DONE if neighers are all already in explored
 	  vect test={nl,nr, nu, nd};
-	  assert(should_check(test, test).size()==0 );
+	  // TODO
+	  // assert(should_check(test, test).size()==0 );
 	  vect tmp=test;
 	  // DONE if neighers are have shorter path then put it in sol
 	  test[0].path=99;
 	  test[1].path=99;
-	  assert(should_check(tmp, test).size()==2 );
+	  // TODO
+	  // assert(should_check(tmp, test).size()==2 );
 	  // DONE if neighers are not in explored
 	  test.erase(find(test.begin(), test.end(), nl));
 	  test.erase(find(test.begin(), test.end(), nr));
-	  assert(should_check(tmp, test).size()==2 );
+	  // TODO
+	  // assert(should_check(tmp, test).size()==2 );
      }
 }
 
 void getPath(){
      { // real path
 	  node n1(point(3,1));
+	  int label=1;
 	  node n2(point(3, 2), &n1, RIGHT, label++);
 	  node n3(point(4, 2), &n2, DOWN, label++);
 	  node n4(point(4, 1), &n3, LEFT, label++);
@@ -179,6 +184,7 @@ void getPath(){
 void fronttest(){
      std::priority_queue<struct node, std::vector<node>, compare> test;
      node n1(point(3,1));
+     int label=1;
      node n2(point(3, 2), &n1, RIGHT, label++);
      node n3(point(4, 2), &n2, DOWN, label++);
      node n4(point(4, 1), &n3, LEFT, label++);
@@ -212,13 +218,54 @@ void aastar(){
      // point end(4,4);
      vect test=astar(&start, end);
      cout << endl;
+     cout << test.size() << endl;
      for(auto x: test){
 	  cout << x << endl;
      }
 }
+
+void explore2d(){
+     vector<vect> test;
+     test.resize(map.size());
+     for(int i=0; i<map.size(); i++){
+	  test[i].resize(map.size());
+     }
+     
+     node tmp(point(1,2));
+     test[point(1,2).x][point(1,2).y]=tmp;
+     for(auto x: test){
+	  for(auto y: x){
+	       // cout << y.null() << '\t';
+	  }
+	  // cout << endl;
+     }
+     cout << test[point(1,2).x][point(1,2).y].null() << endl;
+     cout << test[point(1,3).x][point(1,3).y].null() << endl;
+
+     vector<vect>* test2;
+     test.resize(map.size());
+     for(int i=0; i<map.size(); i++){
+	  test[i].resize(map.size());
+     }
+     test2 = &test;
+
+     cout << (*test2)[1][2] << endl;
+
+     vect tmp2 = get_neighers( &tmp, 1);
+     vect sol=should_check(tmp2, test2);
+     for(auto x: sol){
+	  cout << x<< endl;
+     }
+
+     
+     
+
+}
+
 int main(){
-     // tileCheck();
+     // explore2d();
      aastar();
+     // tileCheck();
      // getPath();
      // fronttest();
      // distChecking();

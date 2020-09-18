@@ -4,8 +4,8 @@
 #include <queue>
 
 
-vect get_neighers(const node* node);
-vect should_check(vect neighs, vect explore );
+vect get_neighers(const node* node, int label);
+vect should_check(vect neighs, std::vector<vect>* explore );
 vect get_path(const node* start, const point* end );
 vect astar(const node* start, const point end);
 
