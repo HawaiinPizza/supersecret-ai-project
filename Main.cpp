@@ -205,10 +205,13 @@ void tileCheck(){
 }
 void aastar(){
      
-     node start(point(3,0));
-     point end(2,2);
+     point _start(3,3);
+     point end(0,5);
+
+     node start(_start);
      // point end(4,4);
      vect test=astar(&start, end);
+     cout << endl;
      for(auto x: test){
 	  cout << x << endl;
      }
