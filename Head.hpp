@@ -12,7 +12,6 @@ enum dir {
     NONE
 };
 
-
 // Enum of the type of elements a map has
 enum grid {
     FREE,
@@ -25,4 +24,5 @@ enum grid {
 extern std::vector<std::vector<grid>> map;
 extern std::pair<int, int> start_pos;
 extern std::pair<int, int> end_pos;
+
 #endif

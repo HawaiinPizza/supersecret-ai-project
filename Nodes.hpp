@@ -17,6 +17,7 @@ struct point {
     point operator-=(const point &rhs);
     friend std::ostream &operator<<(std::ostream &os, const point &p);
 };
+
 extern point _end_pos;
 extern point _start_pos;
 extern int label;
@@ -46,6 +47,7 @@ struct node {
     bool operator>(const node &rhs);
     bool operator<(const node &rhs);
 };
+
 typedef std::vector<node> vect;
 grid getTile(int x, int y);
 

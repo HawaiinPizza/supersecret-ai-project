@@ -15,6 +15,7 @@ point::point(int _x, int _y) {
     x = _x;
     y = _y;
 }
+
 bool point::operator==(const point &rhs) const {
     return (this->x == rhs.x && this->y == rhs.y);
 }
@@ -43,12 +44,15 @@ point point::operator-=(const point &rhs) {
     return *this;
     ;
 }
+
 point _end_pos(2, 2);
 point _start_pos(3, 0);
+
 std::ostream &operator<<(std::ostream &os, const point &p) {
     os << p.x << ':' << p.y;
     return os;
 }
+
 int dist(point start, point end) {
     point tmp = end - start;
     // north movement
@@ -64,7 +68,6 @@ int dist(point start, point end) {
         return tmp.x + tmp.y * 2;
     }
 }
-
 
 int dir_dist(dir _dir) {
     switch (_dir) {
@@ -87,7 +90,6 @@ int dir_dist(dir _dir) {
     };
 }
 
-
 node::node(point _pos, const node *par_node, dir _dir, int _label) {
     pos = _pos;
     past = par_node->past + dir_dist(_dir);
@@ -98,8 +100,6 @@ node::node(point _pos, const node *par_node, dir _dir, int _label) {
     par_dir = _dir;
     par = par_node;
 }
-
-
 
 node::node(point _pos) {
     pos = _pos;
@@ -157,10 +157,10 @@ bool node::operator!=(const node &rhs) {
 bool node::operator>(const node &rhs) {
     return rhs.path > this->path;
 }
+
 bool node::operator<(const node &rhs) {
     return rhs.path < this->path;
 }
-
 
 grid getTile(int x, int y) {
     if (x < 0 || x >= map.size()) {
