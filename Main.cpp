@@ -43,7 +43,6 @@ int distChecking() {
     return 0;
 }
 
-
 void nodeCheck() {
     // cout << "Ending posistion " << _end_pos << endl;
     // cout<< dist(point(3,1), _end_pos) << endl;
@@ -166,7 +165,6 @@ void getPath() {
         }
     }
 }
-
 
 void fronttest() {
     std::priority_queue<struct node, std::vector<node>, compare> test;
