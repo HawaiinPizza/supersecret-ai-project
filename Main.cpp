@@ -205,8 +205,8 @@ void tileCheck(){
 }
 void aastar(){
      
-     point _start(3,3);
-     point end(0,5);
+     point _start(3,0);
+     point end(2,2);
 
      node start(_start);
      // point end(4,4);

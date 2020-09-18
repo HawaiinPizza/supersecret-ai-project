@@ -65,6 +65,7 @@ vect get_path(const node* start, const point* end ){
      while(tmp->pos != *end || tmp == NULL){
 	  sol.push_back(*tmp);
 	  if(tmp->par ==NULL){
+	       std::cout << ("Path wasn't found, even though it should. OOPS");
 	       throw("Path wasn't found, even though it should. OOPS");
 	  }
 	  tmp=tmp->par;
@@ -86,9 +87,9 @@ vect astar(const node* start, const point end){
 	  explore.push_back(*cur);
 	  if(cur->pos == end){
 	       // return sol;
-	       for(auto tmp: explore){
-		    std::cout << tmp << std::endl;
-	       }
+	       // for(auto tmp: explore){
+	       // 	    std::cout << tmp << std::endl;
+	       // }
 	       return get_path(cur, &start->pos);
 	  }
 	  vect neighers = get_neighers(cur);
@@ -97,6 +98,7 @@ vect astar(const node* start, const point end){
 	       front.push(n);
 	  }
      }
+     std::cout << ("God damn it it didn't get a path");
      throw("God damn it it didn't get a path");
      
 }

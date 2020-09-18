@@ -88,7 +88,7 @@ class label(point,parent_pos,dir,label){
 
   
 ** Exploreset  
-   Explore set is now 
+   Explore set is now  2d array
 ** TODO =vector<label> check_neigher(vector<label> explore, vector<label> neighers)=
    - State "DONE"       from "TODO"       [2020-09-17 Thu 12:04]
    #+begin_src plantuml :file .NewLabelCritera.png
