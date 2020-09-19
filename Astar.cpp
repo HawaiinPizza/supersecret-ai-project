@@ -77,22 +77,22 @@ vect get_path(const node* start, const point* end ){
 }
 
 
-vect astar(const node* start, const point end){
-     vect sol;
+std::vector<vect> astar(const node* start, const point end){
+     std::vector<vect> sol;
      frontQueue front;
      front.push(*start);
      std::vector<vect> explore;
      explore.resize(map.size());
      for(int i=0; i<map.size(); i++){
-	  explore[i].resize(map.size());
+	  explore[i].resize(map[i].size());
      }
-     int label = start->label+1;
+     int label = 0;
      while(!front.empty()){
 	  node* cur = new node;
 	  *cur = front.top();
 	  front.pop();
 	  if(cur->pos == end){
-	       return get_path(cur, &start->pos);
+	       return explore;
 	  }
 	  vect neighers = get_neighers(cur);
 	  vect check_these = should_check(neighers, &explore, label);
@@ -100,12 +100,5 @@ vect astar(const node* start, const point end){
 	       front.push(n);
 	  }
      }
-     for(auto row: explore){
-	  for(auto elem: row){
-	       std::cout << elem << std::endl;
-	  }
-	  std::cout << std::endl;
-     }
-     std::cerr << ("God damn it it didn't get a path");
      return sol;
 }

@@ -216,11 +216,22 @@ void aastar(){
 
      node start(_start);
      // point end(4,4);
-     vect test=astar(&start, end);
+     vector<vect> test=astar(&start, end);
      cout << endl;
      cout << test.size() << endl;
-     for(auto x: test){
-	  cout << x << endl;
+     for(auto row: test){
+	  for(auto x: row){
+	       if(x.label ==-1){
+		    cout << "##"<<' ';
+	       }
+	       else{
+		    if(x.label <10 && x.label>=0){
+			 cout << '0';
+		    }
+		    cout << x.label <<' ';
+	       }
+	  }
+	  cout << endl;
      }
 }
 
