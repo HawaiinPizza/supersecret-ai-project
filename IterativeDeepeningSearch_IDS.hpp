@@ -24,7 +24,7 @@ struct node_IDS {
     grid_IDS status = grid_IDS::FRE;
 };
 
-node_IDS nodeIDSGrid[6][5];
+node_IDS nodeIDSGrid[MAP_HEIGHT][MAP_WIDTH];
 
 // Current number to increment and assign to the
 // number of a node_IDS

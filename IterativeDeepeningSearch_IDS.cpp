@@ -42,12 +42,16 @@ void setMap() {
 
 void iterativeDeepeningDFS() {
 
-
-
+    // While the explored set does not contain the goal
+    // Run the DFS
+    // Print the map after every loop
     printMap();
 }
 
-void depthFirstSearch() {
+void depthFirstSearch(int depthLimit) {
+
+    // Keep track of current depth
+    // Increment depth until it matches given depth limit
 }
 
 grid_IDS getNodeStatus(int x, int y) {
