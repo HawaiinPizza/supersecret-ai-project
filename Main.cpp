@@ -216,15 +216,16 @@ void depthFirstSearch(node_IDS nodeGrid[6][5]) {
 }
 
 int main() {
-    // tileCheck();
+
+    node_IDS nodeGrid[6][5];
+    depthFirstSearch(nodeGrid);
+
     aastar();
+    // tileCheck();
     // getPath();
     // fronttest();
     // distChecking();
     // nodeCheck();
     // neigherCheck();
     // explroeCheck();
-
-    node_IDS nodeGrid[6][5];
-    depthFirstSearch(nodeGrid);
 }
