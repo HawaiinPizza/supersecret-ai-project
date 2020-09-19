@@ -18,7 +18,7 @@ struct node_IDS {
 };
 
 void setMap(node_IDS nodeGrid[6][5]);
-void itterativeDFS();
+void itterativeDFS(node_IDS nodeGrid[6][5]);
 void printMap(node_IDS nodeGrid[6][5]);
 
 #endif

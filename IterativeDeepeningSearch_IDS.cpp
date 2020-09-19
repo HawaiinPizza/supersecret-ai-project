@@ -37,7 +37,9 @@ void setMap(node_IDS nodeGrid[6][5]) {
     nodeGrid[2][2].status = grid_IDS::GOL;
 }
 
-void itterativeDFS() {
+void itterativeDFS(node_IDS nodeGrid[6][5]) {
+
+    printMap(nodeGrid);
 }
 
 void printMap(node_IDS nodeGrid[6][5]) {
