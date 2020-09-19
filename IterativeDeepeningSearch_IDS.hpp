@@ -4,18 +4,21 @@
 #include <string>
 
 enum grid_IDS {
-    FREE,
-    BLOCK,
-    START,
-    GOAL
+    FRE,
+    NOTFREE,
+    BLOK,
+    STRT,
+    GOL
 };
 
 struct node_IDS {
     std::string number = "  ";
     bool isVisited = false;
-    grid_IDS status = FREE;
+    grid_IDS status = grid_IDS::FRE;
 };
 
-node_IDS nodeGrid[6][5];
+void setMap(node_IDS nodeGrid[6][5]);
+void itterativeDFS();
+void printMap(node_IDS nodeGrid[6][5]);
 
 #endif

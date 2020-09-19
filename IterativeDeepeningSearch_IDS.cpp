@@ -1,38 +1,52 @@
 #include "IterativeDeepeningSearch_IDS.hpp"
 
-void setMap() {
+void setMap(node_IDS nodeGrid[6][5]) {
 
     // Set Entire Board
-    for (short i = 0; i < 6; i++) {
-        for (short j = 0; j < 5; j++) {
-            nodeGrid[i][j].number = "  ";
-            nodeGrid[i][j].isVisited = false;
-            nodeGrid[i][j].status = FREE;
+    for (short x = 0; x < 6; x++) {
+        for (short y = 0; y < 5; y++) {
+            nodeGrid[x][y].number = "  ";
+            nodeGrid[x][y].isVisited = false;
+            nodeGrid[x][y].status = grid_IDS::FRE;
         }
     }
 
     // Set Block Location
-    for (short i = 1; i < 5; i++) {
-        nodeGrid[i][1].number = "  ";
-        nodeGrid[i][1].isVisited = false;
-        nodeGrid[i][1].status = BLOCK;
+    for (short z = 1; z < 5; z++) {
+        nodeGrid[z][1].number = "##";
+        nodeGrid[z][1].isVisited = false;
+        nodeGrid[z][1].status = grid_IDS::BLOK;
     }
 
-    nodeGrid[1][2].number = "  ";
+    nodeGrid[1][2].number = "##";
     nodeGrid[1][2].isVisited = false;
-    nodeGrid[1][2].status = BLOCK;
+    nodeGrid[1][2].status = grid_IDS::BLOK;
 
-    nodeGrid[3][2].number = "  ";
+    nodeGrid[3][2].number = "##";
     nodeGrid[3][2].isVisited = false;
-    nodeGrid[3][2].status = BLOCK;
+    nodeGrid[3][2].status = grid_IDS::BLOK;
 
     // Set Start Location
     nodeGrid[3][0].number = "00";
     nodeGrid[3][0].isVisited = true;
-    nodeGrid[3][0].status = START;
+    nodeGrid[3][0].status = grid_IDS::STRT;
 
     // Set End Location
     nodeGrid[2][2].number = "  ";
     nodeGrid[2][2].isVisited = false;
-    nodeGrid[2][2].status = GOAL;
+    nodeGrid[2][2].status = grid_IDS::GOL;
+}
+
+void itterativeDFS() {
+}
+
+void printMap(node_IDS nodeGrid[6][5]) {
+    std::cout << "------------------\n";
+    for (short x = 0; x < 6; x++) {
+        for (short y = 0; y < 5; y++) {
+            std::cout << nodeGrid[x][y].number << "  ";
+        }
+        std::cout << "\n";
+    }
+    std::cout << "------------------\n";
 }

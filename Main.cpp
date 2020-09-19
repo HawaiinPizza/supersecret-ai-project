@@ -1,4 +1,5 @@
 #include "Astar.hpp"
+#include "IterativeDeepeningSearch_IDS.hpp"
 #include <algorithm>
 #include <cassert>
 #include <iostream>
@@ -208,6 +209,12 @@ void aastar() {
     }
 }
 
+void depthFirstSearch(node_IDS nodeGrid[6][5]) {
+    setMap(nodeGrid);
+    printMap(nodeGrid);
+    itterativeDFS();
+}
+
 int main() {
     // tileCheck();
     aastar();
@@ -217,4 +224,7 @@ int main() {
     // nodeCheck();
     // neigherCheck();
     // explroeCheck();
+
+    node_IDS nodeGrid[6][5];
+    depthFirstSearch(nodeGrid);
 }
