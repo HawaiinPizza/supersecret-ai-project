@@ -217,8 +217,9 @@ void aastar(){
      node start(_start);
      // point end(4,4);
      vector<vect> test=astar(&start, end);
-     cout << endl;
-     cout << test.size() << endl;
+     cout <<"A* Search" << endl;
+     string line="--------------";
+     cout << line << endl;
      for(auto row: test){
 	  for(auto x: row){
 	       if(x.label ==-1){
@@ -233,6 +234,7 @@ void aastar(){
 	  }
 	  cout << endl;
      }
+     cout << line << endl;
 }
 
 void explore2d(){

@@ -51,7 +51,7 @@ vect should_check( vect neighs, std::vector<vect>* explore, int& label ){
 	       (*explore)[pos.x][pos.y] = tmp;
 	       sol.push_back(tmp);
 	  }
-	  // tmp in explored but has less path cost then what's currenlty in
+	  // // tmp in explored but has less path cost then what's currenlty in
 	  else if( (*explore)[pos.x][pos.y] > tmp){
 	       tmp.label = (*explore)[pos.x][pos.y].label;
 	       (*explore)[pos.x][pos.y] = tmp;
@@ -86,7 +86,8 @@ std::vector<vect> astar(const node* start, const point end){
      for(int i=0; i<map.size(); i++){
 	  explore[i].resize(map[i].size());
      }
-     int label = 0;
+     int label = 1;
+     explore[start->pos.x][start->pos.y]=*start;
      while(!front.empty()){
 	  node* cur = new node;
 	  *cur = front.top();
