@@ -16,6 +16,6 @@ struct node_IDS {
     grid_IDS status = FREE;
 };
 
-extern node_IDS nodeGrid[6][5];
+node_IDS nodeGrid[6][5];
 
 #endif
