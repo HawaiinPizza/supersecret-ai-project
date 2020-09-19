@@ -211,7 +211,7 @@ void aastar() {
 
 void depthFirstSearch(node_IDS nodeGrid[6][5]) {
     setMap(nodeGrid);
-    itterativeDFS(nodeGrid);
+    iterativeDeepeningDFS(nodeGrid);
 }
 
 int main() {
