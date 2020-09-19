@@ -1,15 +1,26 @@
 Steps for DFS:
     1. Get the current node (node, starting at root), current depth, and depth limit
-    2. Increment the current depth
+    2. Increment the current depth (except if we are at root)
     3. Mark current node as visited
         3-1. Add node to the explored set (.number, node_IDS)
         3-2. Pop node off of frontier set
         3-3. If node is FRE change to NOTFRE, else if it is GOL, return true
-        3-4. if the current depth == depth limit, return false
+        3-4. if the current depth == depth limit
+                current depth--
+                return false
     4. Get neighbors of node
-        3-1. If the neighbors list is empty then skip step 4 an 5
+        3-1. If the neighbors list is empty then
+                current depth--
+                return false
     5. Filter neighbors of the node
         5-1. Assign a value to .number of all the neighbors
     6. Push them onto the frontier stack
-    7. If the frontierSet is empty, return false (we did not find the GOL)
-    8. if(depthFirstSearch(frontierSet.top())) then return true, else return false
+    7. If the frontierSet is empty, 
+            current depth--
+            return false (we did not find the GOL)
+    8. if(depthFirstSearch(frontierSet.top(), current depth, depth limit)) 
+            then return true, 
+            else 
+                current depth--
+                depthFirstSearch(frontierSet.top(), current depth, depth limit)
+                return false
