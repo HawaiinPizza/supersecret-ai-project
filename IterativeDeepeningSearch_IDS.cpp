@@ -5,39 +5,39 @@ void setMap() {
     // Set Entire Board
     for (short x = 0; x < 6; x++) {
         for (short y = 0; y < 5; y++) {
-            nodeGrid[x][y].number = "  ";
-            nodeGrid[x][y].isVisited = false;
-            nodeGrid[x][y].status = grid_IDS::FRE;
-            nodeGrid[x][y].position = std::make_pair(x, y);
+            nodeIDSGrid[x][y].number = "  ";
+            nodeIDSGrid[x][y].isVisited = false;
+            nodeIDSGrid[x][y].status = grid_IDS::FRE;
+            nodeIDSGrid[x][y].position = std::make_pair(x, y);
         }
     }
 
     // Set Block Location
     for (short z = 1; z < 5; z++) {
-        nodeGrid[z][1].number = "##";
-        nodeGrid[z][1].isVisited = false;
-        nodeGrid[z][1].status = grid_IDS::BLOK;
+        nodeIDSGrid[z][1].number = "##";
+        nodeIDSGrid[z][1].isVisited = false;
+        nodeIDSGrid[z][1].status = grid_IDS::BLOK;
     }
 
-    nodeGrid[1][2].number = "##";
-    nodeGrid[1][2].isVisited = false;
-    nodeGrid[1][2].status = grid_IDS::BLOK;
+    nodeIDSGrid[1][2].number = "##";
+    nodeIDSGrid[1][2].isVisited = false;
+    nodeIDSGrid[1][2].status = grid_IDS::BLOK;
 
-    nodeGrid[3][2].number = "##";
-    nodeGrid[3][2].isVisited = false;
-    nodeGrid[3][2].status = grid_IDS::BLOK;
+    nodeIDSGrid[3][2].number = "##";
+    nodeIDSGrid[3][2].isVisited = false;
+    nodeIDSGrid[3][2].status = grid_IDS::BLOK;
 
     // Set Start Location
-    nodeGrid[3][0].number = "00";
-    nodeGrid[3][0].isVisited = true;
-    nodeGrid[3][0].status = grid_IDS::STRT;
+    nodeIDSGrid[3][0].number = "00";
+    nodeIDSGrid[3][0].isVisited = true;
+    nodeIDSGrid[3][0].status = grid_IDS::STRT;
 
     // Set End Location
-    nodeGrid[2][2].number = "  ";
-    nodeGrid[2][2].isVisited = false;
-    nodeGrid[2][2].status = grid_IDS::GOL;
+    nodeIDSGrid[2][2].number = "  ";
+    nodeIDSGrid[2][2].isVisited = false;
+    nodeIDSGrid[2][2].status = grid_IDS::GOL;
 
-    exploredNumber = 0;
+    exploredNodeNumber = 0;
 }
 
 void iterativeDeepeningDFS() {
@@ -50,14 +50,23 @@ void iterativeDeepeningDFS() {
 void depthFirstSearch() {
 }
 
-// node_IDS getNode(int x, int y) {
-// }
+grid_IDS getNodeStatus(int x, int y) {
+    if (x < 0 || x >= MAP_WIDTH) {
+        return BLOK;
+    }
+
+    if (y < 0 || y >= MAP_HEIGHT) {
+        return BLOK;
+    }
+
+    return nodeIDSGrid[x][y].status;
+}
 
 void printMap() {
     std::cout << "------------------\n";
     for (short x = 0; x < 6; x++) {
         for (short y = 0; y < 5; y++) {
-            std::cout << nodeGrid[x][y].number << "  ";
+            std::cout << nodeIDSGrid[x][y].number << "  ";
         }
         std::cout << "\n";
     }
