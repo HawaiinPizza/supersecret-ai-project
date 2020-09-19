@@ -54,13 +54,13 @@ void nodeCheck(){
 
      node n1(point(3,1));
 
-     node n2(point(3, 2), &n1, RIGHT, 1);
-     node n7(point(2, 2), &n2, UP,6 );
+     node n2(point(3, 2), &n1, RIGHT);
+     node n7(point(2, 2), &n2, UP);
 
-     node n3(point(3, 0), &n1, LEFT, 2);
-     node n4(point(4, 1), &n1, DOWN, 3);
-     node n5(point(2, 1), &n1, UP,4 );
-     node n6(point(3, 3), &n2, RIGHT, 5);
+     node n3(point(3, 0), &n1, LEFT);
+     node n4(point(4, 1), &n1, DOWN);
+     node n5(point(2, 1), &n1, UP );
+     node n6(point(3, 3), &n2, RIGHT);
 
      assert(5==n1.path);
      assert(5==n2.path);
@@ -79,7 +79,7 @@ void neigherCheck(){
      auto check = [](int x, int y, int count){
 	  node tmp(point(x,y));
 	  int label=2;
-	  vector<node> list = get_neighers(&tmp, label);
+	  vector<node> list = get_neighers(&tmp);
 	  assert(list.size() == count);
      };
      // Middle Middle 4
@@ -106,13 +106,13 @@ void explroeCheck(){
 
      { // Checking if you can search thorugh the list
 	  node n1(point(3,1));
-	  node n2(point(3, 2), &n1, RIGHT, 1);
-	  node n7(point(2, 2), &n2, UP,6 );
+	  node n2(point(3, 2), &n1, RIGHT);
+	  node n7(point(2, 2), &n2, UP );
 
-	  node n3(point(3, 0), &n1, LEFT, 2);
-	  node n6(point(3, 3), &n2, RIGHT, 5);
-	  node n4(point(4, 1), &n1, DOWN, 3);
-	  node n5(point(2, 1), &n1, UP,4 );
+	  node n3(point(3, 0), &n1, LEFT);
+	  node n6(point(3, 3), &n2, RIGHT);
+	  node n4(point(4, 1), &n1, DOWN);
+	  node n5(point(2, 1), &n1, UP );
 	  vect test={n1,n2,n3};
 
 	  auto it=find(test.begin(), test.end(), n1);
@@ -123,10 +123,10 @@ void explroeCheck(){
      }
      { // Now check explore 
 	  node n(point(3,3));
-	  node nl(point(3,2), &n, LEFT, 1);
-	  node nr(point(3,4), &n, RIGHT, 2);
-	  node nu(point(2,3), &n, UP, 3);
-	  node nd(point(4,3), &n, DOWN, 4);
+	  node nl(point(3,2), &n, LEFT);
+	  node nr(point(3,4), &n, RIGHT);
+	  node nu(point(2,3), &n, UP);
+	  node nd(point(4,3), &n, DOWN);
 	  // DONE if neighers are all already in explored
 	  vect test={nl,nr, nu, nd};
 	  // TODO
@@ -149,10 +149,10 @@ void getPath(){
      { // real path
 	  node n1(point(3,1));
 	  int label=1;
-	  node n2(point(3, 2), &n1, RIGHT, label++);
-	  node n3(point(4, 2), &n2, DOWN, label++);
-	  node n4(point(4, 1), &n3, LEFT, label++);
-	  node n5(point(2, 1), &n4, DOWN, label++);
+	  node n2(point(3, 2), &n1, RIGHT);
+	  node n3(point(4, 2), &n2, DOWN );
+	  node n4(point(4, 1), &n3, LEFT );
+	  node n5(point(2, 1), &n4, DOWN );
 	  point tmp=point(3,1);
 	  vect path=get_path(&n5, &tmp);
 	  for(int i=0; i<path.size(); i++){
@@ -185,10 +185,10 @@ void fronttest(){
      std::priority_queue<struct node, std::vector<node>, compare> test;
      node n1(point(3,1));
      int label=1;
-     node n2(point(3, 2), &n1, RIGHT, label++);
-     node n3(point(4, 2), &n2, DOWN, label++);
-     node n4(point(4, 1), &n3, LEFT, label++);
-     node n5(point(2, 1), &n4, DOWN, label++);
+     node n2(point(3, 2), &n1, RIGHT);
+     node n3(point(4, 2), &n2, DOWN );
+     node n4(point(4, 1), &n3, LEFT );
+     node n5(point(2, 1), &n4, DOWN );
      test.push(n1);
      test.push(n2);
      test.push(n3);
@@ -251,18 +251,68 @@ void explore2d(){
 
      cout << (*test2)[1][2] << endl;
 
-     vect tmp2 = get_neighers( &tmp, 1);
-     vect sol=should_check(tmp2, test2);
+     vect tmp2 = get_neighers( &tmp);
+     int label=1;
+     vect sol=should_check(tmp2, test2, label);
      for(auto x: sol){
 	  cout << x<< endl;
      }
+}
 
-     
-     
 
+void getTileTest(){
+
+     // Works when map is this
+     std::vector<std::vector<grid>> map={
+	  {FREE,	FREE,	FREE,	FREE,	FREE,	FREE},
+	  {FREE,	FREE,	FREE,	FREE,	FREE,	FREE},
+	  {FREE,	FREE,	FREE,	FREE,	FREE,	FREE},
+	  {FREE,	FREE,	FREE,	FREE,	FREE,	FREE},
+	  {FREE,	FREE,	FREE,	FREE,	FREE,	FREE},
+	  {FREE,	FREE,	FREE,	FREE,	FREE,	FREE},
+     };
+     for(int i=0; i<map.size(); i++){
+	  {
+	       node tmp(point(i,0));
+	       vect tmp2=get_neighers(&tmp);
+	       if(i == 0 || i == map.size()-1)
+		    assert(tmp2.size()==2 );
+	       else{
+		    assert(tmp2.size()==3);
+	       }
+	  }
+	  {
+	       node tmp(point(i,map[0].size()-1));
+	       vect tmp2=get_neighers(&tmp);
+	       if(i == 0 || i == map.size()-1)
+		    assert(tmp2.size()==2 );
+	       else{
+		    assert(tmp2.size()==3);
+	       }
+	  }
+	  {
+	       node tmp(point(0,i));
+	       vect tmp2=get_neighers(&tmp);
+	       if(i == 0 || i == map[0].size()-1)
+		    assert(tmp2.size()==2 );
+	       else{
+		    assert(tmp2.size()==3);
+	       }
+	  }
+	  {
+	       node tmp(point(map.size()-1,i));
+	       vect tmp2=get_neighers(&tmp);
+	       if(i == 0 || i == map[0].size()-1)
+		    assert(tmp2.size()==2 );
+	       else{
+		    assert(tmp2.size()==3);
+	       }
+	  }
+     }
 }
 
 int main(){
+     // getTileTest();
      // explore2d();
      aastar();
      // tileCheck();

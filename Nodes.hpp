@@ -29,12 +29,12 @@ struct node{
      int pred;
      int path;
      point past_pos;
-     int label;
+     int label=-1;
      dir par_dir;
      const node* par;
      
      node();
-     node(point _pos,  const node* par_node, dir _dir, int _label);
+     node(point _pos,  const node* par_node, dir _dir  );
      node(point _pos);
 
 

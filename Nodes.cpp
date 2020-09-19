@@ -86,13 +86,12 @@ int dir_dist(dir _dir){
 }
 
 
-node::node(point _pos, const node* par_node, dir _dir, int _label){
+node::node(point _pos, const node* par_node, dir _dir){
      pos = _pos;
      past = par_node->past + dir_dist(_dir);
      pred = dist(pos, _end_pos);
      path = past+pred;
      past_pos = par_node->pos;
-     label = _label;
      par_dir = _dir;
      par = par_node;
 }
