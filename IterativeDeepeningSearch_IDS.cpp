@@ -41,17 +41,19 @@ void setMap() {
 }
 
 void iterativeDeepeningDFS() {
-
+    setMap();
     // While the explored set does not contain the goal
     // Run the DFS
     // Print the map after every loop
     printMap();
 }
 
-void depthFirstSearch(int depthLimit) {
+bool depthFirstSearch() {
 
     // Keep track of current depth
     // Increment depth until it matches given depth limit
+
+    return false;
 }
 
 void printMap() {
@@ -67,7 +69,7 @@ void printMap() {
 
 std::vector<node_IDS> getNodeNeighbors(std::pair<int, int> nodePosition) {
 
-    std::vector<node_IDS> neighbors;
+    std::vector<node_IDS> neighbors{};
     grid_IDS nodeStatus;
 
     nodeStatus = getNodeStatus(nodePosition.first, nodePosition.second - 1);
@@ -98,7 +100,7 @@ std::vector<node_IDS> getNodeNeighbors(std::pair<int, int> nodePosition) {
 }
 
 std::vector<node_IDS> checkExploredSet(std::vector<node_IDS> neighbors) {
-    std::vector<node_IDS> filteredNeighbors;
+    std::vector<node_IDS> filteredNeighbors{};
 
     for (node_IDS temp : neighbors) {
         std::unordered_map<std::string, node_IDS>::const_iterator got = exploredSet.find(temp.number);

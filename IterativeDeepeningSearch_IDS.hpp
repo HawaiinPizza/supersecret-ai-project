@@ -36,7 +36,7 @@ std::unordered_map<std::string, node_IDS> exploredSet;
 
 void setMap();
 void iterativeDeepeningDFS();
-void depthFirstSearch();
+bool depthFirstSearch();
 void printMap();
 
 grid_IDS getNodeStatus(int nodeRow, int nodeColumn);

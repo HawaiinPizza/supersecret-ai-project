@@ -210,7 +210,7 @@ void aastar() {
 }
 
 void iterativeDFS() {
-    setMap();
+
     iterativeDeepeningDFS();
 }
 
