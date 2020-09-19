@@ -5,7 +5,7 @@
 
 enum grid_IDS {
     FRE,
-    NOTFREE,
+    NOTFRE,
     BLOK,
     STRT,
     GOL
