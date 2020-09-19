@@ -92,15 +92,7 @@ vect astar(const node* start, const point end){
 	  *cur = front.top();
 	  front.pop();
 	  if(cur->pos == end){
-	       // std::cout << "we did it boys 🚬\n";
-	       // for(auto row: explore){
-	       // 	    for(auto tmp: row){
-	       // 		 std::cout << tmp << '\n';
-	       // 	    }
-	       // 	    std::cout << std::endl;
-	       // }
-	       // 	    std::cout << std::endl;
-	       // return get_path(cur, &start->pos);
+	       return get_path(cur, &start->pos);
 	  }
 	  vect neighers = get_neighers(cur);
 	  vect check_these = should_check(neighers, &explore, label);
