@@ -4,6 +4,7 @@
 #include <stack>
 #include <string>
 #include <unordered_map>
+#include <utility>
 
 enum grid_IDS {
     FRE,
@@ -16,13 +17,14 @@ enum grid_IDS {
 struct node_IDS {
     std::string number = "  ";
     bool isVisited = false;
+    std::pair<int, int> position;
     grid_IDS status = grid_IDS::FRE;
 };
 
-int exploredNumber = 0;
+extern int exploredNumber;
 
-std::stack<node_IDS> frontierSet;
-std::unordered_map<node_IDS, std::string> exploredSet;
+extern std::stack<node_IDS> frontierSet;
+extern std::unordered_map<std::pair<int, int>, std::string> exploredSet;
 
 void setMap(node_IDS nodeGrid[6][5]);
 void iterativeDeepeningDFS(node_IDS nodeGrid[6][5]);

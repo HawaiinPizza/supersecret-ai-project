@@ -8,6 +8,7 @@ void setMap(node_IDS nodeGrid[6][5]) {
             nodeGrid[x][y].number = "  ";
             nodeGrid[x][y].isVisited = false;
             nodeGrid[x][y].status = grid_IDS::FRE;
+            nodeGrid[x][y].position = std::make_pair(x, y);
         }
     }
 
