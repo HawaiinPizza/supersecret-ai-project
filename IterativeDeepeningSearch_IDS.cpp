@@ -1,6 +1,6 @@
 #include "IterativeDeepeningSearch_IDS.hpp"
 
-void setMap(node_IDS nodeGrid[6][5]) {
+void setMap() {
 
     // Set Entire Board
     for (short x = 0; x < 6; x++) {
@@ -40,17 +40,20 @@ void setMap(node_IDS nodeGrid[6][5]) {
     exploredNumber = 0;
 }
 
-void iterativeDeepeningDFS(node_IDS nodeGrid[6][5]) {
+void iterativeDeepeningDFS() {
 
 
 
-    printMap(nodeGrid);
+    printMap();
 }
 
 void depthFirstSearch() {
 }
 
-void printMap(node_IDS nodeGrid[6][5]) {
+// node_IDS getNode(int x, int y) {
+// }
+
+void printMap() {
     std::cout << "------------------\n";
     for (short x = 0; x < 6; x++) {
         for (short y = 0; y < 5; y++) {

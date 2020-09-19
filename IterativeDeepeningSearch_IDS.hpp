@@ -21,14 +21,16 @@ struct node_IDS {
     grid_IDS status = grid_IDS::FRE;
 };
 
-extern int exploredNumber;
+node_IDS nodeGrid[6][5];
 
-extern std::stack<node_IDS> frontierSet;
-extern std::unordered_map<std::pair<int, int>, std::string> exploredSet;
+int exploredNumber;
 
-void setMap(node_IDS nodeGrid[6][5]);
-void iterativeDeepeningDFS(node_IDS nodeGrid[6][5]);
+std::stack<node_IDS> frontierSet;
+std::unordered_map<std::string, node_IDS> exploredSet;
+
+void setMap();
+void iterativeDeepeningDFS();
 void depthFirstSearch();
-void printMap(node_IDS nodeGrid[6][5]);
+void printMap();
 
 #endif

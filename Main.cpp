@@ -209,15 +209,14 @@ void aastar() {
     }
 }
 
-void depthFirstSearch(node_IDS nodeGrid[6][5]) {
-    setMap(nodeGrid);
-    iterativeDeepeningDFS(nodeGrid);
+void iterativeDFS() {
+    setMap();
+    iterativeDeepeningDFS();
 }
 
 int main() {
 
-    node_IDS nodeGrid[6][5];
-    depthFirstSearch(nodeGrid);
+    iterativeDFS();
 
     aastar();
     // tileCheck();
