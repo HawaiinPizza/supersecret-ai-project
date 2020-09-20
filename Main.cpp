@@ -1,58 +1,55 @@
 #include "Astar.hpp"
-#include <vector>
-#include <iostream>
-#include <cassert>
-#include <queue>
 #include <algorithm>
+#include <cassert>
+#include <iostream>
+#include <queue>
+#include <vector>
 using namespace std;
 
-int distChecking(){
-     point pointstay(5,5);
-     // North east 
-     point p(3,7);
-     assert(dist(pointstay, p)  == 10);
+int distChecking() {
+    point pointstay(5, 5);
+    // North east
+    point p(3, 7);
+    assert(dist(pointstay, p) == 10);
 
-     // North
-     p=point(3,5);
-     assert(dist(pointstay, p)  == 6);
-     
-     // Norht west
-     p=point(3,3);
-     assert(dist(pointstay, p)  == 10);
-     
-     // East
-     p=point(5,7);
-     assert(dist(pointstay, p)  == 4);
+    // North
+    p = point(3, 5);
+    assert(dist(pointstay, p) == 6);
 
-     // Sotuh East
-     p=point(7,7);
-     assert(dist(pointstay, p)  == 6);
+    // Norht west
+    p = point(3, 3);
+    assert(dist(pointstay, p) == 10);
 
-     // South
-     p=point(7,5);
-     assert(dist(pointstay, p)  == 2);
+    // East
+    p = point(5, 7);
+    assert(dist(pointstay, p) == 4);
 
-     // South west
-     p=point(7,3);
-     assert(dist(pointstay, p)  == 6);
+    // Sotuh East
+    p = point(7, 7);
+    assert(dist(pointstay, p) == 6);
 
-     // West
-     p=point(5,3);
-     assert(dist(pointstay, p)  == 4);
+    // South
+    p = point(7, 5);
+    assert(dist(pointstay, p) == 2);
 
-     return 0;
-     
+    // South west
+    p = point(7, 3);
+    assert(dist(pointstay, p) == 6);
 
+    // West
+    p = point(5, 3);
+    assert(dist(pointstay, p) == 4);
 
+    return 0;
 }
 
 
-void nodeCheck(){
-     // cout << "Ending posistion " << _end_pos << endl;
-     // cout<< dist(point(3,1), _end_pos) << endl;
-     // node n1(point(3,1)); cout << n1 << endl;
+void nodeCheck() {
+    // cout << "Ending posistion " << _end_pos << endl;
+    // cout<< dist(point(3,1), _end_pos) << endl;
+    // node n1(point(3,1)); cout << n1 << endl;
 
-     node n1(point(3,1));
+    node n1(point(3, 1));
 
      node n2(point(3, 2), &n1, RIGHT);
      node n7(point(2, 2), &n2, UP);
@@ -71,8 +68,19 @@ void nodeCheck(){
      assert(5==n5.path);
      assert(9==n6.path);
 
+    node n3(point(3, 0), &n1, LEFT, 2);
+    node n4(point(4, 1), &n1, DOWN, 3);
+    node n5(point(2, 1), &n1, UP, 4);
+    node n6(point(3, 3), &n2, RIGHT, 5);
 
+    assert(5 == n1.path);
+    assert(5 == n2.path);
+    assert(5 == n7.path);
 
+    assert(9 == n3.path);
+    assert(9 == n4.path);
+    assert(5 == n5.path);
+    assert(9 == n6.path);
 }
 
 void neigherCheck(){
@@ -199,15 +207,16 @@ void fronttest(){
 	  cout << test.top() << endl;
 	  test.pop();
      }
+
 }
 
-void tileCheck(){
-     for(std::vector<grid> row: map){
-	  for(grid tile : row){
-	       cout << tile << '\t';
-	  }
-	  cout << endl;
-     }
+void tileCheck() {
+    for (std::vector<grid> row : map) {
+        for (grid tile : row) {
+            cout << tile << '\t';
+        }
+        cout << endl;
+    }
 }
 void aastar(){
      
@@ -336,4 +345,13 @@ int main(){
      // neigherCheck();
      // explroeCheck();
 
+int main() {
+    // tileCheck();
+    aastar();
+    // getPath();
+    // fronttest();
+    // distChecking();
+    // nodeCheck();
+    // neigherCheck();
+    // explroeCheck();
 }

@@ -12,4 +12,5 @@ std::vector<std::vector<grid>> map={
 std::pair<int, int> start_pos={3,0};
 std::pair<int, int> end_pos={2,2};
 
-
+std::pair<int, int> start_pos = {3, 0};
+std::pair<int, int> end_pos = {2, 2};

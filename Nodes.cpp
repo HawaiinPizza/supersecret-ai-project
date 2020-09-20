@@ -1,8 +1,8 @@
 #include "Nodes.hpp"
-#include <stdexcept>
 #include <algorithm>
-#include <cmath>
 #include <climits>
+#include <cmath>
+#include <stdexcept>
 // Global variable. Increases all the bloddy time
 // NOTE May need to change
 
@@ -175,4 +175,5 @@ grid getTile(int x, int y){
      }
 
      return map[x][y];
+
 }

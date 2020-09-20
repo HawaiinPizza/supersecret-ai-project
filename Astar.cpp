@@ -2,27 +2,25 @@
 #include <algorithm>
 #include <stdlib.h>
 
-vect get_neighers(const node* node){
-     std::vector<struct node> neigherbors;
-     point pos = node->pos;
-     // LEFT
-     if( getTile(pos.x, pos.y-1) == FREE ){
-	  struct node tmp(point(pos.x, pos.y-1), node, LEFT);
-	  neigherbors.push_back(tmp);
-     }
 
-     // UP
-     if (getTile(pos.x-1, pos.y) == FREE){
-	  struct node tmp(point(pos.x-1, pos.y), node,UP);
-	  neigherbors.push_back(tmp);
-     }
+vect get_neighers(const node *node) {
+    std::vector<struct node> neigherbors;
+    point pos = node->pos;
+    // LEFT
+    if (getTile(pos.x, pos.y - 1) == FREE) {
+        struct node tmp(point(pos.x, pos.y - 1), node, LEFT, label++);
+        neigherbors.push_back(tmp);
+    }
 
-     // RIGHT
-     if( getTile(pos.x, pos.y+1) == FREE ){
-
+    // UP
+    if (getTile(pos.x - 1, pos.y) == FREE) {
+        struct node tmp(point(pos.x - 1, pos.y), node, UP, label++);
+        neigherbors.push_back(tmp);
+    }
+    // RIGHT
+    if (getTile(pos.x, pos.y + 1) == FREE) {
 	  struct node tmp(point(pos.x, pos.y+1), node,  RIGHT);
-	  neigherbors.push_back(tmp);
-	       
+	  neigherbors.push_back(tmp);   
      }
 
      // DOWN
@@ -102,4 +100,5 @@ std::vector<vect> astar(const node* start, const point end){
 	  }
      }
      return sol;
+
 }

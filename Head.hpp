@@ -1,17 +1,24 @@
 #ifndef HEAD
 #define HEAD
-#include <vector>
 #include <math.h>
+#include <vector>
 
 // Enum of the directions agent can go
-enum dir{
-     LEFT, RIGHT, UP, DOWN, NONE
+enum dir {
+    LEFT,
+    RIGHT,
+    UP,
+    DOWN,
+    NONE
 };
 
 
 // Enum of the type of elements a map has
-enum grid{
-     FREE, BLOCK, START, GOAL
+enum grid {
+    FREE,
+    BLOCK,
+    START,
+    GOAL
 };
 
 // The actual map

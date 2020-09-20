@@ -4,23 +4,24 @@
 #include <iostream>
 
 
-struct point{
-     int x; int y;
-     point();
-     point(int x, int y);
-     bool operator==(const point& rhs) const;
-     bool operator!=(const point& rhs) const;
-     point operator+(const point& rhs) const;
-     point operator+=(const point& rhs) ;
-     point operator-(const point& rhs) const;
-     point operator-=(const point& rhs) ;
-     friend std::ostream &operator<<(std::ostream &os, const point& p);
+struct point {
+    int x;
+    int y;
+    point();
+    point(int x, int y);
+    bool operator==(const point &rhs) const;
+    bool operator!=(const point &rhs) const;
+    point operator+(const point &rhs) const;
+    point operator+=(const point &rhs);
+    point operator-(const point &rhs) const;
+    point operator-=(const point &rhs);
+    friend std::ostream &operator<<(std::ostream &os, const point &p);
 };
 extern point _end_pos;
 extern point _start_pos;
 extern int label;
 
-int dist(point start, point end=_end_pos);
+int dist(point start, point end = _end_pos);
 int dir_dist(dir _dir);
 
 struct node{
@@ -45,6 +46,7 @@ struct node{
      bool operator>(const node& rhs);
      bool operator<(const node& rhs);
      bool null();
+
 };
 typedef std::vector<node> vect;
 grid getTile(int x, int y);
