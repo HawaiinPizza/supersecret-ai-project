@@ -40,6 +40,7 @@ void printMap();
 
 bool depthFirstSearch(node_IDS currentNode, short &currentDepth, short depthLimit);
 
+std::string assignNodeNumber();
 
 grid_IDS getNodeStatus(int nodeRow, int nodeColumn);
 
