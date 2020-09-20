@@ -47,7 +47,7 @@ void setMapAndSets() {
 
 void iterativeDeepeningDFS() {
     short depthLimit = 0;
-    short currentDepth = 0;
+    currentDepth = 0;
 
     // Set the map
     setMapAndSets();
@@ -57,7 +57,7 @@ void iterativeDeepeningDFS() {
 
     // While the explored set does not contain the goal
     // Run the DFS
-    while (!depthFirstSearch(nodeIDSGrid[3][0], currentDepth, depthLimit)) {
+    while (!depthFirstSearch(nodeIDSGrid[3][0], depthLimit)) {
         printMap();       // Print the map after every loop
         setMapAndSets();  // Reset the map and frontier and explored set
         depthLimit++;     // Increase the depth limit
@@ -85,10 +85,14 @@ void addNodesToGrid(std::vector<node_IDS> nodeList) {
         nodeIDSGrid[nodeList[w].position.first][nodeList[w].position.second] = nodeList[w];
 }
 
-bool depthFirstSearch(node_IDS currentNode, short &currentDepth, short depthLimit) {
+bool depthFirstSearch(node_IDS currentNode, short depthLimit) {
+
+    std::cout << "Current Node: " << currentNode.number << std::endl;
 
     // 1. Increment the current depth (except if we are at root)
-    if (currentNode.status != STRT)
+    if ((currentNode.status == FRE ||
+         currentNode.status == GOL) &&
+        currentNode.isVisited == false)
         currentDepth++;
 
     //   2. Mark current node as visited
@@ -112,6 +116,7 @@ bool depthFirstSearch(node_IDS currentNode, short &currentDepth, short depthLimi
     //      we have failed the search in this branch
     if (currentDepth == depthLimit) {
         currentDepth--;
+        std::cout << "Current depth after hitting depth limit: " << currentDepth << std::endl;
         return false;
     }
 
@@ -134,6 +139,12 @@ bool depthFirstSearch(node_IDS currentNode, short &currentDepth, short depthLimi
     for (short y = 0; y < thisNodeNeighbors.size(); y++)
         thisNodeNeighbors[y].number = assignNodeNumber();
 
+
+    std::cout << "\nCurrent Neighbors: ";
+    for (short i = 0; i < thisNodeNeighbors.size(); i++) {
+        std::cout << " " << thisNodeNeighbors[i].number;
+    }
+    std::cout << std::endl;
 
     //   6 Add nodes to node grid so they can be displayed
     //     later on with the print map function
@@ -158,7 +169,7 @@ bool depthFirstSearch(node_IDS currentNode, short &currentDepth, short depthLimi
     //      until we fund the GOAL, and if that doesnt happen
     //      then we fail
     for (short z = 0; z < thisNodeNeighbors.size(); z++) {
-        if (depthFirstSearch(frontierIDSSet.top(), currentDepth, depthLimit))
+        if (depthFirstSearch(frontierIDSSet.top(), depthLimit))
             return true;
     }
 
@@ -217,7 +228,7 @@ std::vector<node_IDS> checkExploredSet(const std::vector<node_IDS> neighbors) {
     for (node_IDS temp : neighbors) {
         std::unordered_map<std::string, node_IDS>::const_iterator got = exploredIDSSet.find(temp.number);
 
-        if (got == exploredIDSSet.end() && temp.status != BLOK)
+        if (got == exploredIDSSet.end())
             filteredNeighbors.push_back(temp);
     }
 
@@ -225,11 +236,11 @@ std::vector<node_IDS> checkExploredSet(const std::vector<node_IDS> neighbors) {
 }
 
 grid_IDS getNodeStatus(int nodeRow, int nodeColumn) {
-    if (nodeRow < 0 || nodeRow >= MAP_WIDTH) {
+    if (nodeColumn < 0 || nodeColumn >= MAP_WIDTH) {
         return BLOK;
     }
 
-    if (nodeColumn < 0 || nodeColumn >= MAP_HEIGHT) {
+    if (nodeRow < 0 || nodeRow >= MAP_HEIGHT) {
         return BLOK;
     }
 

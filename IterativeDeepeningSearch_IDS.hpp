@@ -30,6 +30,7 @@ node_IDS nodeIDSGrid[MAP_HEIGHT][MAP_WIDTH];
 // Current number to increment and assign to the
 // number of a node_IDS
 int exploredIDSNumber;
+int currentDepth;
 
 std::stack<node_IDS> frontierIDSSet;
 std::unordered_map<std::string, node_IDS> exploredIDSSet;
@@ -39,7 +40,7 @@ void iterativeDeepeningDFS();
 void printMap();
 void addNodesToGrid(std::vector<node_IDS> nodeList);
 
-bool depthFirstSearch(node_IDS currentNode, short &currentDepth, short depthLimit);
+bool depthFirstSearch(node_IDS currentNode, short depthLimit);
 
 std::string assignNodeNumber();
 
