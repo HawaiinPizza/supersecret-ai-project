@@ -18,9 +18,23 @@ Steps for DFS:
     7. If the frontierSet is empty, 
             current depth--
             return false (we did not find the GOL)
+            
+            
     8. if(depthFirstSearch(frontierSet.top(), current depth, depth limit)) 
             then return true, 
             else 
                 current depth--
-                depthFirstSearch(frontierSet.top(), current depth, depth limit)
-                return false
+                if(depthFirstSearch(frontierSet.top(), current depth, depth limit))
+                    return true
+                    else return false
+            
+    alternatively this one (and it will probably be this 
+                            one considering that the previous one fails 
+                            at more than two neighbors, that could be fixed 
+                            by adding one more check considering a node cant 
+                            have more than 3)
+            
+    8. foreach node_IDS in frontierSet 
+            if(depthFirstSearch(frontierSet.top(), current depth, depth limit))
+                return true
+    
