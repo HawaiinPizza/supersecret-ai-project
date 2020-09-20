@@ -1,6 +1,8 @@
 Steps for DFS:
     1. Get the current node (node, starting at root), current depth, and depth limit
+    
     2. Increment the current depth (except if we are at root)
+    
     3. Mark current node as visited
         3-1. Add node to the explored set (.number, node_IDS)
         3-2. Pop node off of frontier set
@@ -8,33 +10,42 @@ Steps for DFS:
         3-4. if the current depth == depth limit
                 current depth--
                 return false
+                
     4. Get neighbors of node
         3-1. If the neighbors list is empty then
                 current depth--
                 return false
+                
     5. Filter neighbors of the node
         5-1. Assign a value to .number of all the neighbors
+        
     6. Push them onto the frontier stack
+    
     7. If the frontierSet is empty, 
             current depth--
             return false (we did not find the GOL)
             
-            
-    8. if(depthFirstSearch(frontierSet.top(), current depth, depth limit)) 
-            then return true, 
-            else 
-                current depth--
-                if(depthFirstSearch(frontierSet.top(), current depth, depth limit))
-                    return true
-                    else return false
-            
-    alternatively this one (and it will probably be this 
-                            one considering that the previous one fails 
-                            at more than two neighbors, that could be fixed 
-                            by adding one more check considering a node cant 
-                            have more than 3)
-            
-    8. foreach node_IDS in frontierSet 
-            if(depthFirstSearch(frontierSet.top(), current depth, depth limit))
-                return true
+    8. for amount of neighbors of currentNode
+            if(depthFirstSearch(frontierSet.top(), current depth, depth limit)) 
+                then return true
+    
+    9. return false
+    
+Steps for DFS:
+    1. Get the currentNode (node, starting at root)
+    2. Increment the current depth (except if we are at root)
+    3. Push node onto the frontierSet
+    4. While frontierSet is not empty
+        4-1. currentNode = frontierSet.Pop
+        4-2. If currentNode.isVisited = false
+                    then currentNode.isVisited = true 
+                         Add currentNode to exploredSet
+                        if the currentNode.status == STRT || currentNode.status == GOL
+                            // Do nothing
+                        else
+                            currentNode.status = NOTFRE
+                    Get all neighbors
+                    Filter all neighbors
+                    Give all neighbors a .number
+                    Push neighbors onto frontierSet
     
