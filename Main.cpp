@@ -218,9 +218,8 @@ int main() {
 
     iterativeDFS();
     std::cout << assignNodeNumber();
-
-    aastar();
     // tileCheck();
+    aastar();
     // getPath();
     // fronttest();
     // distChecking();
