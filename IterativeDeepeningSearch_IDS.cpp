@@ -200,28 +200,32 @@ std::vector<node_IDS> getNodeNeighbors(const std::pair<int, int> nodePosition) {
 
     // Left
     nodeStatus = getNodeStatus(nodePosition.first, nodePosition.second - 1);
-    if ((nodeStatus == FRE || nodeStatus == GOL) && !nodeGrid[nodePosition.first][nodePosition.second - 1].isVisited) {
+    if ((nodeStatus == FRE || nodeStatus == GOL) &&
+        !nodeGrid[nodePosition.first][nodePosition.second - 1].isVisited) {
         neighbors.push_back(
             nodeGrid[nodePosition.first][nodePosition.second - 1]);
     }
 
     // Up
     nodeStatus = getNodeStatus(nodePosition.first - 1, nodePosition.second);
-    if ((nodeStatus == FRE || nodeStatus == GOL) && !nodeGrid[nodePosition.first - 1][nodePosition.second].isVisited) {
+    if ((nodeStatus == FRE || nodeStatus == GOL) &&
+        !nodeGrid[nodePosition.first - 1][nodePosition.second].isVisited) {
         neighbors.push_back(
             nodeGrid[nodePosition.first - 1][nodePosition.second]);
     }
 
     // Right
     nodeStatus = getNodeStatus(nodePosition.first, nodePosition.second + 1);
-    if ((nodeStatus == FRE || nodeStatus == GOL) && !nodeGrid[nodePosition.first][nodePosition.second + 1].isVisited) {
+    if ((nodeStatus == FRE || nodeStatus == GOL) &&
+        !nodeGrid[nodePosition.first][nodePosition.second + 1].isVisited) {
         neighbors.push_back(
             nodeGrid[nodePosition.first][nodePosition.second + 1]);
     }
 
     // Down
     nodeStatus = getNodeStatus(nodePosition.first + 1, nodePosition.second);
-    if ((nodeStatus == FRE || nodeStatus == GOL) && !nodeGrid[nodePosition.first + 1][nodePosition.second].isVisited) {
+    if ((nodeStatus == FRE || nodeStatus == GOL) &&
+        !nodeGrid[nodePosition.first + 1][nodePosition.second].isVisited) {
         neighbors.push_back(
             nodeGrid[nodePosition.first + 1][nodePosition.second]);
     }
