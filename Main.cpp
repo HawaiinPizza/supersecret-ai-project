@@ -217,7 +217,6 @@ void iterativeDFS() {
 int main() {
 
     iterativeDFS();
-    std::cout << assignNodeNumber();
     // tileCheck();
     aastar();
     // getPath();

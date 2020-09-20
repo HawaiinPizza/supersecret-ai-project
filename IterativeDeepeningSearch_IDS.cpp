@@ -1,68 +1,80 @@
 #include "IterativeDeepeningSearch_IDS.hpp"
 
+node_IDS nodeGrid[MAP_HEIGHT][MAP_WIDTH];
+
+// Current number to increment and assign to the
+// number of a node_IDS
+int exploredNumber;
+int currentDepth;
+
+std::stack<node_IDS> frontierSet;
+std::unordered_map<std::string, node_IDS> exploredSet;
+
 void setMapAndSets() {
 
     // Set Entire Board
     for (short x = 0; x < 6; x++) {
         for (short y = 0; y < 5; y++) {
-            nodeDFSGrid[x][y].number = "  ";
-            nodeDFSGrid[x][y].isVisited = false;
-            nodeDFSGrid[x][y].status = grid_IDS::FRE;
-            nodeDFSGrid[x][y].position = std::make_pair(x, y);
+            nodeGrid[x][y].number = "  ";
+            nodeGrid[x][y].isVisited = false;
+            nodeGrid[x][y].status = grid_IDS::FRE;
+            nodeGrid[x][y].position = std::make_pair(x, y);
         }
     }
 
     // Set Block Location
     for (short z = 1; z < 5; z++) {
-        nodeDFSGrid[z][1].number = "##";
-        nodeDFSGrid[z][1].isVisited = false;
-        nodeDFSGrid[z][1].status = grid_IDS::BLOK;
+        nodeGrid[z][1].number = "##";
+        nodeGrid[z][1].isVisited = false;
+        nodeGrid[z][1].status = grid_IDS::BLOK;
     }
 
-    nodeDFSGrid[1][2].number = "##";
-    nodeDFSGrid[1][2].isVisited = false;
-    nodeDFSGrid[1][2].status = grid_IDS::BLOK;
+    nodeGrid[1][2].number = "##";
+    nodeGrid[1][2].isVisited = false;
+    nodeGrid[1][2].status = grid_IDS::BLOK;
 
-    nodeDFSGrid[3][2].number = "##";
-    nodeDFSGrid[3][2].isVisited = false;
-    nodeDFSGrid[3][2].status = grid_IDS::BLOK;
+    nodeGrid[3][2].number = "##";
+    nodeGrid[3][2].isVisited = false;
+    nodeGrid[3][2].status = grid_IDS::BLOK;
 
     // Set Start Location
-    nodeDFSGrid[3][0].number = "00";
-    nodeDFSGrid[3][0].isVisited = true;
-    nodeDFSGrid[3][0].status = grid_IDS::STRT;
+    nodeGrid[3][0].number = "00";
+    nodeGrid[3][0].isVisited = true;
+    nodeGrid[3][0].status = grid_IDS::STRT;
 
     // Set End Location
-    nodeDFSGrid[2][2].number = "  ";
-    nodeDFSGrid[2][2].isVisited = false;
-    nodeDFSGrid[2][2].status = grid_IDS::GOL;
+    nodeGrid[2][2].number = "  ";
+    nodeGrid[2][2].isVisited = false;
+    nodeGrid[2][2].status = grid_IDS::GOL;
 
-    exploredDFSNumber = 0;
-    exploredDFSSet.clear();
+    exploredNumber = 0;
+    exploredSet.clear();
 
-    while (!frontierDFSSet.empty()) {
-        frontierDFSSet.pop();
+    while (!frontierSet.empty()) {
+        frontierSet.pop();
     }
 }
 
 void iterativeDeepeningDFS() {
     short depthLimit = 0;
-    currentDFSDepth = 0;
+    currentDepth = 0;
 
     // Set the map
     setMapAndSets();
 
     // Set start point of maze
-    frontierDFSSet.push(nodeDFSGrid[3][0]);
+    frontierSet.push(nodeGrid[3][0]);
+
+    std::cout << "IDS with depth from 1 to 9:\n";
 
     // While the explored set does not contain the goal
     // Run the DFS
-    while (!depthFirstSearch(nodeDFSGrid[3][0], depthLimit)) {
-        printMap();          // Print the map after every loop
-        setMapAndSets();     // Reset the map and frontier and explored set
-        depthLimit++;        // Increase the depth limit
-        currentDFSDepth = 0; // Reset the current depth
-        frontierDFSSet.push(nodeDFSGrid[3][0]);
+    while (!depthFirstSearch(nodeGrid[3][0], depthLimit)) {
+        printMap();       // Print the map after every loop
+        setMapAndSets();  // Reset the map and frontier and explored set
+        depthLimit++;     // Increase the depth limit
+        currentDepth = 0; // Reset the current depth
+        frontierSet.push(nodeGrid[3][0]);
     }
 
     // Print the map after final Success
@@ -73,7 +85,7 @@ void printMap() {
     std::cout << "------------------\n";
     for (short x = 0; x < 6; x++) {
         for (short y = 0; y < 5; y++) {
-            std::cout << nodeDFSGrid[x][y].number << "  ";
+            std::cout << nodeGrid[x][y].number << "  ";
         }
         std::cout << "\n";
     }
@@ -82,25 +94,23 @@ void printMap() {
 
 void addNodesToGrid(std::vector<node_IDS> nodeList) {
     for (short w = 0; w < nodeList.size(); w++)
-        nodeDFSGrid[nodeList[w].position.first][nodeList[w].position.second] = nodeList[w];
+        nodeGrid[nodeList[w].position.first][nodeList[w].position.second] = nodeList[w];
 }
 
 bool depthFirstSearch(node_IDS currentNode, short depthLimit) {
-
-    std::cout << "Current Node: " << currentNode.number << std::endl;
 
     // 1. Increment the current depth (except if we are at root)
     if (currentNode.status != STRT &&
         (currentNode.status == FRE ||
          currentNode.status == GOL))
-        currentDFSDepth++;
+        currentDepth++;
 
     //   2. Mark current node as visited
     // 2-1. Add node to the explored set (.number, node_IDS)
-    exploredDFSSet.emplace(currentNode.number, currentNode);
+    exploredSet.emplace(currentNode.number, currentNode);
 
     // 2-2. Pop node off of frontier set
-    frontierDFSSet.pop();
+    frontierSet.pop();
 
     // 2-3. If node is available, mark it as visited
     //      if it is instead the final goal, then the search is done
@@ -109,15 +119,14 @@ bool depthFirstSearch(node_IDS currentNode, short depthLimit) {
         currentNode.isVisited = true;
     } else if (currentNode.status == GOL) {
         currentNode.isVisited = true;
-        currentDFSDepth--;
+        currentDepth--;
         return true;
     }
 
     // 2-4. If we reached the depth limit
     //      we have failed the search in this branch
-    if (currentDFSDepth == depthLimit) {
-        currentDFSDepth--;
-        std::cout << "Current depth after hitting depth limit: " << currentDFSDepth << std::endl;
+    if (currentDepth == depthLimit) {
+        currentDepth--;
         return false;
     }
 
@@ -130,7 +139,7 @@ bool depthFirstSearch(node_IDS currentNode, short depthLimit) {
     //   4. If the neighbors list is empty then
     //      this branch is a dead end
     if (thisNodeNeighbors.empty()) {
-        currentDFSDepth--;
+        currentDepth--;
         return false;
     }
 
@@ -142,13 +151,6 @@ bool depthFirstSearch(node_IDS currentNode, short depthLimit) {
         thisNodeNeighbors[y].isVisited = true;
     }
 
-
-    std::cout << "\nCurrent Neighbors: ";
-    for (short i = 0; i < thisNodeNeighbors.size(); i++) {
-        std::cout << " " << thisNodeNeighbors[i].number;
-    }
-    std::cout << std::endl;
-
     //   6 Add nodes to node grid so they can be displayed
     //     later on with the print map function
     addNodesToGrid(thisNodeNeighbors);
@@ -157,40 +159,38 @@ bool depthFirstSearch(node_IDS currentNode, short depthLimit) {
     //      so we can explore them
     std::vector<node_IDS>::iterator it = thisNodeNeighbors.begin();
     for (; it != thisNodeNeighbors.end(); it++) {
-        frontierDFSSet.push(*it);
+        frontierSet.push(*it);
     }
 
     //   8. If the frontier stack is emty then we have failed the search
-    if (frontierDFSSet.empty()) {
-        currentDFSDepth--;
+    if (frontierSet.empty()) {
+        currentDepth--;
         return false;
     }
 
-    std::cout << "Current frontier set top value: " << frontierDFSSet.top().number << std::endl;
-    std::cout << "Current Depth: " << currentDFSDepth << std::endl;
     //   9. For the amount of neighbors of the current node
     //      run the search to explore all if the options
     //      until we fund the GOAL, and if that doesnt happen
     //      then we fail
     for (short z = 0; z < thisNodeNeighbors.size(); z++) {
-        if (depthFirstSearch(frontierDFSSet.top(), depthLimit)) {
-            currentDFSDepth--;
+        if (depthFirstSearch(frontierSet.top(), depthLimit)) {
+            currentDepth--;
             return true;
         }
     }
 
-    currentDFSDepth--;
+    currentDepth--;
     return false;
 }
 
 std::string assignNodeNumber() {
 
-    exploredDFSNumber++;
-    if (exploredDFSNumber < 10) {
+    exploredNumber++;
+    if (exploredNumber < 10) {
 
-        return "0" + std::to_string(exploredDFSNumber);
+        return "0" + std::to_string(exploredNumber);
     }
-    return std::to_string(exploredDFSNumber);
+    return std::to_string(exploredNumber);
 }
 
 std::vector<node_IDS> getNodeNeighbors(const std::pair<int, int> nodePosition) {
@@ -200,30 +200,30 @@ std::vector<node_IDS> getNodeNeighbors(const std::pair<int, int> nodePosition) {
 
     // Left
     nodeStatus = getNodeStatus(nodePosition.first, nodePosition.second - 1);
-    if ((nodeStatus == FRE || nodeStatus == GOL) && !nodeDFSGrid[nodePosition.first][nodePosition.second - 1].isVisited) {
+    if ((nodeStatus == FRE || nodeStatus == GOL) && !nodeGrid[nodePosition.first][nodePosition.second - 1].isVisited) {
         neighbors.push_back(
-            nodeDFSGrid[nodePosition.first][nodePosition.second - 1]);
+            nodeGrid[nodePosition.first][nodePosition.second - 1]);
     }
 
     // Up
     nodeStatus = getNodeStatus(nodePosition.first - 1, nodePosition.second);
-    if ((nodeStatus == FRE || nodeStatus == GOL) && !nodeDFSGrid[nodePosition.first - 1][nodePosition.second].isVisited) {
+    if ((nodeStatus == FRE || nodeStatus == GOL) && !nodeGrid[nodePosition.first - 1][nodePosition.second].isVisited) {
         neighbors.push_back(
-            nodeDFSGrid[nodePosition.first - 1][nodePosition.second]);
+            nodeGrid[nodePosition.first - 1][nodePosition.second]);
     }
 
     // Right
     nodeStatus = getNodeStatus(nodePosition.first, nodePosition.second + 1);
-    if ((nodeStatus == FRE || nodeStatus == GOL) && !nodeDFSGrid[nodePosition.first][nodePosition.second + 1].isVisited) {
+    if ((nodeStatus == FRE || nodeStatus == GOL) && !nodeGrid[nodePosition.first][nodePosition.second + 1].isVisited) {
         neighbors.push_back(
-            nodeDFSGrid[nodePosition.first][nodePosition.second + 1]);
+            nodeGrid[nodePosition.first][nodePosition.second + 1]);
     }
 
     // Down
     nodeStatus = getNodeStatus(nodePosition.first + 1, nodePosition.second);
-    if ((nodeStatus == FRE || nodeStatus == GOL) && !nodeDFSGrid[nodePosition.first + 1][nodePosition.second].isVisited) {
+    if ((nodeStatus == FRE || nodeStatus == GOL) && !nodeGrid[nodePosition.first + 1][nodePosition.second].isVisited) {
         neighbors.push_back(
-            nodeDFSGrid[nodePosition.first + 1][nodePosition.second]);
+            nodeGrid[nodePosition.first + 1][nodePosition.second]);
     }
 
     return neighbors;
@@ -233,9 +233,9 @@ std::vector<node_IDS> checkExploredSet(const std::vector<node_IDS> neighbors) {
     std::vector<node_IDS> filteredNeighbors{};
 
     for (node_IDS temp : neighbors) {
-        std::unordered_map<std::string, node_IDS>::const_iterator got = exploredDFSSet.find(temp.number);
+        std::unordered_map<std::string, node_IDS>::const_iterator got = exploredSet.find(temp.number);
 
-        if (got == exploredDFSSet.end())
+        if (got == exploredSet.end())
             filteredNeighbors.push_back(temp);
     }
 
@@ -251,5 +251,5 @@ grid_IDS getNodeStatus(int nodeRow, int nodeColumn) {
         return BLOK;
     }
 
-    return nodeDFSGrid[nodeRow][nodeColumn].status;
+    return nodeGrid[nodeRow][nodeColumn].status;
 }
