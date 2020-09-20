@@ -1,9 +1,6 @@
 #include "Astar.hpp"
 #include "IterativeDeepeningSearch_IDS.hpp"
-#include <algorithm>
-#include <cassert>
 #include <iostream>
-#include <queue>
 #include <vector>
 using namespace std;
 
