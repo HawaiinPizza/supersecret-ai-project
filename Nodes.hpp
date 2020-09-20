@@ -25,27 +25,29 @@ extern int label;
 int dist(point start, point end = _end_pos);
 int dir_dist(dir _dir);
 
-struct node {
-    point pos;
-    int past;
-    int pred;
-    int path;
-    point past_pos;
-    int label;
-    dir par_dir;
-    const node *par;
+struct node{
+     point pos;
+     int past;
+     int pred;
+     int path;
+     point past_pos;
+     int label=-1;
+     dir par_dir;
+     const node* par;
+     
+     node();
+     node(point _pos,  const node* par_node, dir _dir  );
+     node(point _pos);
 
-    node();
-    node(point _pos, const node *par_node, dir _dir, int _label);
-    node(point _pos);
 
+     friend std::ostream &operator<<(std::ostream &os, const node& n);
 
-    friend std::ostream &operator<<(std::ostream &os, const node &n);
+     bool operator==(const node& rhs);
+     bool operator!=(const node& rhs);
+     bool operator>(const node& rhs);
+     bool operator<(const node& rhs);
+     bool null();
 
-    bool operator==(const node &rhs);
-    bool operator!=(const node &rhs);
-    bool operator>(const node &rhs);
-    bool operator<(const node &rhs);
 };
 
 typedef std::vector<node> vect;

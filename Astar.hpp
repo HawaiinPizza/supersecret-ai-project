@@ -4,10 +4,11 @@
 #include <queue>
 
 
-vect get_neighers(const node *node);
-vect should_check(vect neighs, vect explore);
-vect get_path(const node *start, const point *end);
-vect astar(const node *start, const point end);
+vect get_neighers(const node* node);
+vect should_check(vect neighs, std::vector<vect>* explore, int& label );
+vect get_path(const node* start, const point* end );
+std::vector<vect> astar(const node* start, const point end);
+
 
 struct compare {
     bool operator()(const node &p1, const node &p2) {
