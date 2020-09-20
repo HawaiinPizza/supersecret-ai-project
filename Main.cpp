@@ -16,7 +16,7 @@ void aastar() {
     struct tm tstruct;
     tstruct = *localtime(&now);
 
-    std::cout << "Muaz Alhaidar(omunam) and Zaki Ahmed(zakahmed) - Time: " << tstruct.tm_hour - 12 << ":" << tstruct.tm_min << ":" << tstruct.tm_sec << std::endl;
+    std::cout << "Muaz Alhaidar(omunam) and Zakariya Ahmed(zakahmed) - Time: " << tstruct.tm_hour - 12 << ":" << tstruct.tm_min << ":" << tstruct.tm_sec << std::endl;
     cout << "A* Search" << endl;
     string line = "--------------";
     cout << line << endl;

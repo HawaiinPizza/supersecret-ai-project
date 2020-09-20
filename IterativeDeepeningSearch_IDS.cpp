@@ -86,7 +86,7 @@ void iterativeDeepeningDFS() {
     struct tm tstruct;
     tstruct = *localtime(&now);
 
-    std::cout << "Muaz Alhaidar(omunam) and Zaki Ahmed(zakahmed) - Time: " << tstruct.tm_hour - 12 << ":" << tstruct.tm_min << ":" << tstruct.tm_sec << std::endl;
+    std::cout << "Muaz Alhaidar(omunam) and Zakariya Ahmed(zakahmed) - Time: " << tstruct.tm_hour - 12 << ":" << tstruct.tm_min << ":" << tstruct.tm_sec << std::endl;
     // Print the map after final Success
     printMap();
 }
