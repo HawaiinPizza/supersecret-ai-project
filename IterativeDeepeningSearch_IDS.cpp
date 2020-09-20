@@ -65,7 +65,7 @@ void iterativeDeepeningDFS() {
     // Set start point of maze
     frontierSet.push(nodeGrid[3][0]);
 
-    std::cout << "IDS with depth from 1 to 9:\n";
+    std::cout << "IDS with depth from 0 to 9:\n";
 
     // While the explored set does not contain the goal
     // Run the DFS
