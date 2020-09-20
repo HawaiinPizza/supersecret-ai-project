@@ -15,6 +15,11 @@ void aastar() {
     node start(_start);
     // point end(4,4);
     vector<vect> test = astar(&start, end);
+    time_t now = time(0);
+    struct tm tstruct;
+    tstruct = *localtime(&now);
+
+    std::cout << "Muaz Alhaidar(omunam) and Zaki Ahmed(zakahmed) - Time: " << tstruct.tm_hour - 12 << ":" << tstruct.tm_min << ":" << tstruct.tm_sec << std::endl;
     cout << "A* Search" << endl;
     string line = "--------------";
     cout << line << endl;
