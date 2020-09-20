@@ -1,4 +1,5 @@
 #include "Astar.hpp"
+#include "IterativeDeepeningSearch_IDS.hpp"
 #include <algorithm>
 #include <cassert>
 #include <iostream>
@@ -42,7 +43,6 @@ int distChecking() {
 
     return 0;
 }
-
 
 void nodeCheck() {
     // cout << "Ending posistion " << _end_pos << endl;
@@ -188,7 +188,6 @@ void getPath(){
      }
 }
 
-
 void fronttest(){
      std::priority_queue<struct node, std::vector<node>, compare> test;
      node n1(point(3,1));
@@ -204,10 +203,9 @@ void fronttest(){
      test.push(n5);
      int tmp = test.top().path;
      while(!test.empty()){
-	  cout << test.top() << endl;
-	  test.pop();
+	      cout << test.top() << endl;
+	      test.pop();
      }
-
 }
 
 void tileCheck() {
@@ -346,6 +344,8 @@ int main(){
      // explroeCheck();
 
 int main() {
+
+    iterativeDeepeningDFS();
     // tileCheck();
     aastar();
     // getPath();
