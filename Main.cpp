@@ -209,14 +209,9 @@ void aastar() {
     }
 }
 
-void iterativeDFS() {
-
-    iterativeDeepeningDFS();
-}
-
 int main() {
 
-    iterativeDFS();
+    iterativeDeepeningDFS();
     // tileCheck();
     aastar();
     // getPath();
