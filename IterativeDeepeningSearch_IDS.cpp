@@ -82,14 +82,14 @@ void iterativeDeepeningDFS() {
 }
 
 void printMap() {
-    std::cout << "------------------\n";
+    std::cout << "--------------\n";
     for (short x = 0; x < 6; x++) {
         for (short y = 0; y < 5; y++) {
-            std::cout << nodeGrid[x][y].number << "  ";
+            std::cout << nodeGrid[x][y].number << " ";
         }
         std::cout << "\n";
     }
-    std::cout << "------------------\n";
+    std::cout << "--------------\n";
 }
 
 void addNodesToGrid(std::vector<node_IDS> nodeList) {
