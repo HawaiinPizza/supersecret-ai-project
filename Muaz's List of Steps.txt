@@ -12,7 +12,7 @@ Steps for DFS:
                 return false
                 
     4. Get neighbors of node
-        3-1. If the neighbors list is empty then
+        4-1. If the neighbors list is empty then
                 current depth--
                 return false
                 

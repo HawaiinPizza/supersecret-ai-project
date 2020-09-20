@@ -34,14 +34,16 @@ int exploredNumber;
 std::stack<node_IDS> frontierSet;
 std::unordered_map<std::string, node_IDS> exploredSet;
 
-void setMap();
+void setMapAndSets();
 void iterativeDeepeningDFS();
-bool depthFirstSearch();
 void printMap();
+
+bool depthFirstSearch(node_IDS currentNode, short &currentDepth, short depthLimit);
+
 
 grid_IDS getNodeStatus(int nodeRow, int nodeColumn);
 
-std::vector<node_IDS> getNodeNeighbors(std::pair<int, int> nodePosition);
-std::vector<node_IDS> checkExploredSet(std::vector<node_IDS> neighbors);
+std::vector<node_IDS> getNodeNeighbors(const std::pair<int, int> nodePosition);
+std::vector<node_IDS> checkExploredSet(const std::vector<node_IDS> neighbors);
 
 #endif
