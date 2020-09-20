@@ -25,18 +25,19 @@ struct node_IDS {
     grid_IDS status = grid_IDS::FRE;
 };
 
-node_IDS nodeGrid[MAP_HEIGHT][MAP_WIDTH];
+node_IDS nodeIDSGrid[MAP_HEIGHT][MAP_WIDTH];
 
 // Current number to increment and assign to the
 // number of a node_IDS
-int exploredNumber;
+int exploredIDSNumber;
 
-std::stack<node_IDS> frontierSet;
-std::unordered_map<std::string, node_IDS> exploredSet;
+std::stack<node_IDS> frontierIDSSet;
+std::unordered_map<std::string, node_IDS> exploredIDSSet;
 
 void setMapAndSets();
 void iterativeDeepeningDFS();
 void printMap();
+void addNodesToGrid(std::vector<node_IDS> nodeList);
 
 bool depthFirstSearch(node_IDS currentNode, short &currentDepth, short depthLimit);
 
