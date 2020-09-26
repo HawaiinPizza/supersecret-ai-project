@@ -74,7 +74,7 @@ void iterativeDeepeningDFS() {
         struct tm tstruct;
         tstruct = *localtime(&now);
 
-        std::cout << "Muaz Alhaidar(omunam) and Zakariya Ahmed(zakahmed) - Time: " << tstruct.tm_hour - 12 << ":" << tstruct.tm_min << ":" << tstruct.tm_sec << std::endl;
+        std::cout << "Muaz Alhaidar(omunam) and Zakariya Ahmed(zakahmed) - Time: " << (((tstruct.tm_hour - 12) < 0) ? tstruct.tm_hour : tstruct.tm_hour - 12) << ":" << tstruct.tm_min << ":" << tstruct.tm_sec << std::endl;
         printMap();       // Print the map after every loop
         setMapAndSets();  // Reset the map and frontier and explored set
         depthLimit++;     // Increase the depth limit
@@ -86,7 +86,7 @@ void iterativeDeepeningDFS() {
     struct tm tstruct;
     tstruct = *localtime(&now);
 
-    std::cout << "Muaz Alhaidar(omunam) and Zakariya Ahmed(zakahmed) - Time: " << tstruct.tm_hour - 12 << ":" << tstruct.tm_min << ":" << tstruct.tm_sec << std::endl;
+    std::cout << "Muaz Alhaidar(omunam) and Zakariya Ahmed(zakahmed) - Time: " << (((tstruct.tm_hour - 12) < 0) ? tstruct.tm_hour : tstruct.tm_hour - 12) << ":" << tstruct.tm_min << ":" << tstruct.tm_sec << std::endl;
     // Print the map after final Success
     printMap();
 }
